@@ -1,3 +1,3 @@
 # _CoolStuff_, 2025
-## -+> Html, Css, JavaScript <+-
-# -+> A PLACE 2 BUY OUR COOL STUFF <+-
+#### -+> Html, Css, JavaScript <+-
+## -+> A PLACE 2 BUY OUR COOL STUFF <+-
