@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function observeElements() {
         const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
         
+        // Adjust threshold based on screen size for better mobile experience
+        const isMobile = window.innerWidth <= 420;
+        const threshold = isMobile ? 0.05 : 0.1;
+        const rootMargin = isMobile ? '0px 0px -20px 0px' : '0px 0px -50px 0px';
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -45,8 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: threshold,
+            rootMargin: rootMargin
         });
 
         animatedElements.forEach(element => {
@@ -120,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let lastScrollY = 0;
         let scrollDirection = 'down';
+        const isMobile = window.innerWidth <= 420;
 
         function handleScroll() {
             const scrollY = window.scrollY;
@@ -129,35 +135,57 @@ document.addEventListener("DOMContentLoaded", function () {
             scrollDirection = scrollY > lastScrollY ? 'down' : 'up';
             lastScrollY = scrollY;
             
-            // Subtitle fade effect
-            const fadeDistance = windowHeight * 0.3; // Fade over 30% of viewport height
-            const subtitleOpacity = Math.max(0, 1 - (scrollY / fadeDistance));
-            const subtitleTranslateY = scrollY * 0.3; // Reduced movement to prevent overlap
-            
-            // Nav movement with buffer animation
-            let navTransform = 0;
-            
-            if (scrollY <= 50) {
-                // Near the top - reset to original position or add buffer
-                if (scrollDirection === 'up' && scrollY < 20) {
-                    navTransform = 0; // Reset to original position
+            // Reduce parallax effects on mobile for better performance
+            if (isMobile) {
+                // Simplified mobile effects
+                const fadeDistance = windowHeight * 0.2;
+                const subtitleOpacity = Math.max(0, 1 - (scrollY / fadeDistance));
+                
+                subtitle.style.opacity = subtitleOpacity;
+                subtitle.style.transform = `translateY(-${scrollY * 0.1}px)`;
+                
+                // Minimal nav movement on mobile
+                if (scrollY > 30) {
+                    nav.style.transform = `translateY(-10px)`;
                 } else {
-                    navTransform = Math.min(scrollY * 0.2, 10); // Small buffer movement down
+                    nav.style.transform = `translateY(0px)`;
                 }
             } else {
-                // Further down - normal upward movement
-                const navMoveDistance = Math.min(scrollY * 0.4, 25);
-                navTransform = -navMoveDistance;
+                // Full desktop effects
+                const fadeDistance = windowHeight * 0.3;
+                const subtitleOpacity = Math.max(0, 1 - (scrollY / fadeDistance));
+                const subtitleTranslateY = scrollY * 0.3;
+                
+                let navTransform = 0;
+                
+                if (scrollY <= 50) {
+                    if (scrollDirection === 'up' && scrollY < 20) {
+                        navTransform = 0;
+                    } else {
+                        navTransform = Math.min(scrollY * 0.2, 10);
+                    }
+                } else {
+                    const navMoveDistance = Math.min(scrollY * 0.4, 25);
+                    navTransform = -navMoveDistance;
+                }
+                
+                subtitle.style.opacity = subtitleOpacity;
+                subtitle.style.transform = `translateY(-${subtitleTranslateY}px)`;
+                nav.style.transform = `translateY(${navTransform}px)`;
             }
-            
-            // Apply the effects
-            subtitle.style.opacity = subtitleOpacity;
-            subtitle.style.transform = `translateY(-${subtitleTranslateY}px)`;
-            nav.style.transform = `translateY(${navTransform}px)`;
         }
 
-        // Add scroll event listener
-        window.addEventListener('scroll', handleScroll);
+        // Add scroll event listener with throttling for mobile
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(handleScroll);
+                ticking = true;
+                setTimeout(() => { ticking = false; }, isMobile ? 16 : 8);
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
         
         // Set initial state
         handleScroll();
@@ -451,6 +479,104 @@ document.addEventListener("DOMContentLoaded", function () {
         volumeSlider.value = currentVolume * 100;
     }
 
+    // RESPONSIVE BEHAVIOR HANDLER
+    function setupResponsiveBehavior() {
+        let resizeTimeout;
+        
+        function handleResize() {
+            // Clear existing timeout
+            clearTimeout(resizeTimeout);
+            
+            // Set a new timeout
+            resizeTimeout = setTimeout(() => {
+                const isMobile = window.innerWidth <= 420;
+                const isTablet = window.innerWidth <= 768 && window.innerWidth > 420;
+                const flyingElements = document.querySelector('.flying-elements');
+                
+                // Handle flying elements based on screen size
+                if (flyingElements) {
+                    if (isMobile) {
+                        flyingElements.style.display = 'none';
+                    } else {
+                        // Check if animations are enabled via settings
+                        const animationToggle = document.getElementById('animationToggle');
+                        const toggleText = animationToggle?.querySelector('.toggle-text');
+                        const animationsEnabled = toggleText?.textContent === 'ON';
+                        
+                        if (animationsEnabled) {
+                            flyingElements.style.display = 'block';
+                        }
+                    }
+                }
+                
+                // Re-initialize parallax with new screen size considerations
+                setupHeaderParallax();
+                
+                // Re-initialize intersection observer with new thresholds
+                observeElements();
+                
+                // Adjust popup sizes for better mobile experience
+                const musicPopup = document.getElementById('musicPopup');
+                if (musicPopup && isMobile) {
+                    const musicContent = musicPopup.querySelector('.music-popup-content');
+                    if (musicContent) {
+                        musicContent.style.borderRadius = '0';
+                    }
+                }
+                
+                // Handle navigation behavior on mobile
+                const nav = document.querySelector('nav');
+                if (nav && isMobile) {
+                    nav.style.transform = 'translateY(0px)';
+                }
+                
+            }, 250); // Debounce resize events
+        }
+        
+        // Add resize event listener
+        window.addEventListener('resize', handleResize);
+        
+        // Initial setup
+        handleResize();
+    }
+
+    // TOUCH GESTURE SUPPORT FOR MOBILE
+    function setupTouchGestures() {
+        const isMobile = window.innerWidth <= 420;
+        
+        if (!isMobile) return;
+        
+        // Add touch-friendly interactions
+        const interactiveElements = document.querySelectorAll('.product-card, .product-card1, .song-btn, .setting-toggle-btn');
+        
+        interactiveElements.forEach(element => {
+            // Add touch feedback
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+                this.style.transition = 'transform 0.1s ease';
+            });
+            
+            element.addEventListener('touchend', function() {
+                this.style.transform = '';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            element.addEventListener('touchcancel', function() {
+                this.style.transform = '';
+                this.style.transition = 'transform 0.3s ease';
+            });
+        });
+        
+        // Prevent double-tap zoom on buttons
+        const buttons = document.querySelectorAll('button, .song-btn');
+        buttons.forEach(button => {
+            button.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                this.click();
+            });
+        });
+    }
+
     // INITIALIZE EVERYTHING
     addScrollAnimations();
     observeElements();
@@ -459,4 +585,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setupHeaderParallax();
     setupSettingsMenu();
     setupMusicPlayer();
+    setupResponsiveBehavior();
+    setupTouchGestures();
 });
+
