@@ -287,6 +287,8 @@ footer {
     text-align: center;
     position: relative;
     z-index: 2;
+        margin-left: -20px;
+    width: 100vw
 }
 
 .glasses {
