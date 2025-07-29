@@ -163,10 +163,300 @@ document.addEventListener("DOMContentLoaded", function () {
         handleScroll();
     }
 
+    // SETTINGS MENU FUNCTIONALITY
+    function setupSettingsMenu() {
+        const settingsMenuToggle = document.getElementById('settingsMenuToggle');
+        const settingsMenu = document.getElementById('settingsMenu');
+        const animationToggle = document.getElementById('animationToggle');
+        const flyingElements = document.querySelector('.flying-elements');
+        const toggleText = animationToggle.querySelector('.toggle-text');
+        
+        if (!settingsMenuToggle || !settingsMenu || !animationToggle || !flyingElements) return;
+
+        let menuOpen = false;
+        let animationsEnabled = true;
+
+        // Toggle settings menu
+        function toggleSettingsMenu() {
+            menuOpen = !menuOpen;
+            settingsMenu.classList.toggle('active', menuOpen);
+        }
+
+        // Toggle animations
+        function toggleAnimations() {
+            animationsEnabled = !animationsEnabled;
+            
+            if (animationsEnabled) {
+                // Enable animations
+                flyingElements.style.display = 'block';
+                flyingElements.style.animationPlayState = 'running';
+                toggleText.textContent = 'ON';
+                animationToggle.classList.remove('disabled');
+                
+                // Re-enable individual animations
+                const flyingImages = flyingElements.querySelectorAll('img');
+                flyingImages.forEach(img => {
+                    img.style.animationPlayState = 'running';
+                });
+            } else {
+                // Disable animations
+                flyingElements.style.display = 'none';
+                toggleText.textContent = 'OFF';
+                animationToggle.classList.add('disabled');
+            }
+        }
+
+        // Close menu when clicking outside
+        function handleClickOutside(event) {
+            if (menuOpen && !settingsMenu.contains(event.target) && !settingsMenuToggle.contains(event.target)) {
+                menuOpen = false;
+                settingsMenu.classList.remove('active');
+            }
+        }
+
+        // Event listeners
+        settingsMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleSettingsMenu();
+        });
+
+        animationToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleAnimations();
+        });
+
+        document.addEventListener('click', handleClickOutside);
+
+        // Close menu with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && menuOpen) {
+                menuOpen = false;
+                settingsMenu.classList.remove('active');
+            }
+        });
+        
+        // Initialize states
+        toggleText.textContent = 'ON';
+    }
+
+    // MUSIC PLAYER FUNCTIONALITY
+    function setupMusicPlayer() {
+        const musicMenuToggle = document.getElementById('musicMenuToggle');
+        const musicPopup = document.getElementById('musicPopup');
+        const closeMusicPopup = document.getElementById('closeMusicPopup');
+        const songButtons = document.querySelectorAll('.song-btn');
+        const currentGenre = document.getElementById('currentGenre');
+        const currentSongTitle = document.getElementById('currentSongTitle');
+        const radioDescription = document.getElementById('radioDescription');
+        const radioDescriptionDupe = document.getElementById('radioDescriptionDupe');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+
+        let currentAudio = null;
+        let isPlaying = false;
+        let isMuted = false;
+        let currentVolume = 0.5;
+
+        // Song data (you can replace these with actual audio file URLs)
+        const songs = {
+            'cyber-dreams': {
+                name: 'Hip Hop',
+                songTitle: 'Song 1',
+                albumCover: 'imgs/pngs-gifs/everythingpossible.png',
+                url: 'music/cyber-dreams.mp3' // Replace with actual audio file
+            },
+            'neon-nights': {
+                name: 'Smooth Jazz',
+                songTitle: 'Song 2',
+                albumCover: 'imgs/pngs-gifs/ikeaAlien.png',
+                url: 'music/neon-nights.mp3' // Replace with actual audio file
+            },
+            'digital-rain': {
+                name: 'Ambient',
+                songTitle: 'Song 3',
+                albumCover: 'imgs/pngs-gifs/aeroglasses.gif',
+                url: 'music/digital-rain.mp3' // Replace with actual audio file
+            },
+            'retro-wave': {
+                name: 'House',
+                songTitle: 'Song 4',
+                albumCover: 'imgs/pngs-gifs/lighting.gif',
+                url: 'music/retro-wave.mp3' // Replace with actual audio file
+            },
+            'synthwave': {
+                name: 'Techno',
+                songTitle: 'Song 5',
+                albumCover: 'imgs/pngs-gifs/bat.gif',
+                url: 'music/synthwave.mp3' // Replace with actual audio file
+            },
+            'lo-fi-beats': {
+                name: 'Pop',
+                songTitle: 'Song 6',
+                albumCover: 'imgs/pngs-gifs/hand.png',
+                url: 'music/lo-fi-beats.mp3' // Replace with actual audio file
+            },
+            'synthpop': {
+                name: 'Dance',
+                songTitle: 'Song 7',
+                albumCover: 'imgs/pngs-gifs/lighting2.gif',
+                url: 'music/synthpop.mp3' // Replace with actual audio file
+            },
+            'chillwave': {
+                name: 'Funk',
+                songTitle: 'Song 8',
+                albumCover: 'imgs/pngs-gifs/us.png',
+                url: 'music/chillwave.mp3' // Replace with actual audio file
+            },
+            'cyberpunk': {
+                name: 'Spooky',
+                songTitle: 'Song 9',
+                albumCover: 'imgs/pngs-gifs/fuckedGremlin.png',
+                url: 'music/cyberpunk.mp3' // Replace with actual audio file
+            }
+        };
+
+        // Open music popup
+        function openMusicPopup() {
+            musicPopup.style.display = 'block';
+            // Auto-play first song if no audio is currently playing
+            if (!currentAudio) {
+                playSong('cyber-dreams');
+            }
+        }
+
+        // Close music popup
+        function closeMusicPopupFunc() {
+            musicPopup.style.display = 'none';
+        }
+
+        // Play selected song
+        function playSong(songId) {
+            currentSong = songId;
+            const song = songs[songId];
+            
+            // Update current album cover
+            const currentAlbumCover = document.getElementById('currentAlbumCover');
+            if (currentAlbumCover) {
+                currentAlbumCover.src = song.albumCover;
+            }
+            
+            // Update now playing text
+            document.getElementById('nowPlaying').textContent = `${song.name}`;
+            document.getElementById('currentSongTitle').textContent = song.songTitle;
+            
+            // Remove active class from all song buttons
+            const songButtons = document.querySelectorAll('.song-btn');
+            songButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to selected song button
+            const selectedButton = document.querySelector(`[data-song="${songId}"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('active');
+            }
+            
+            // Update the play/pause button to show "pause" when playing
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            playPauseBtn.textContent = '⏸️';
+            isPlaying = true;
+            
+            console.log(`Playing: ${song.name} - ${song.songTitle}`);
+        }
+
+        // Toggle play/pause
+        function togglePlayPause() {
+            if (currentAudio) {
+                if (isPlaying) {
+                    currentAudio.pause();
+                    isPlaying = false;
+                    playPauseBtn.textContent = '▶';
+                } else {
+                    currentAudio.play().then(() => {
+                        isPlaying = true;
+                        playPauseBtn.textContent = '⏸';
+                    }).catch(error => {
+                        console.log('Play was prevented:', error);
+                    });
+                }
+            }
+        }
+
+        // Toggle mute
+        function toggleMute() {
+            if (currentAudio) {
+                if (isMuted) {
+                    currentAudio.volume = currentVolume;
+                    volumeSlider.value = currentVolume * 100;
+                    volumeBtn.textContent = '🔊';
+                    isMuted = false;
+                } else {
+                    currentAudio.volume = 0;
+                    volumeSlider.value = 0;
+                    volumeBtn.textContent = '🔇';
+                    isMuted = true;
+                }
+            }
+        }
+
+        // Update volume
+        function updateVolume() {
+            const volume = volumeSlider.value / 100;
+            currentVolume = volume;
+            if (currentAudio && !isMuted) {
+                currentAudio.volume = volume;
+            }
+            
+            // Update volume button icon
+            if (volume === 0) {
+                volumeBtn.textContent = '🔇';
+            } else if (volume < 0.5) {
+                volumeBtn.textContent = '🔉';
+            } else {
+                volumeBtn.textContent = '🔊';
+            }
+        }
+
+        // Event listeners
+        musicMenuToggle.addEventListener('click', openMusicPopup);
+        closeMusicPopup.addEventListener('click', closeMusicPopupFunc);
+        
+        // Close popup when clicking outside
+        musicPopup.addEventListener('click', function(e) {
+            if (e.target === musicPopup) {
+                closeMusicPopupFunc();
+            }
+        });
+
+        // Song selection
+        songButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const songKey = this.getAttribute('data-song');
+                playSong(songKey);
+            });
+        });
+
+        // Music controls
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        volumeBtn.addEventListener('click', toggleMute);
+        volumeSlider.addEventListener('input', updateVolume);
+
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && musicPopup.style.display === 'block') {
+                closeMusicPopupFunc();
+            }
+        });
+
+        // Initialize volume slider
+        volumeSlider.value = currentVolume * 100;
+    }
+
     // INITIALIZE EVERYTHING
     addScrollAnimations();
     observeElements();
     setupSmoothScroll();
     setupSwordPopup();
     setupHeaderParallax();
+    setupSettingsMenu();
+    setupMusicPlayer();
 });
