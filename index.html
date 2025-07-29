@@ -3,7 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewpo                    <div class="radio-display">
+                        <div class="radio-header">
+                            <span class="radio-station">SVC RADIO</span>
+                            <span class="radio-frequency">96.7 FM</span>
+                        </div>ontent="width=device-width, initial-scale=1.0">
     <title>Source Code Vintage</title>
     <link rel="stylesheet" href="css-js/style.css">
     <script defer src="css-js/styles.js"></script>
@@ -15,18 +19,55 @@
     <img class="bat" src="imgs/pngs-gifs/bat.gif" alt="Bat">
     <img class="alien" src="imgs/pngs-gifs/ikeaAlien.png" alt="Alien">
     
+    <!-- FLYING ANIMATED ELEMENTS -->
+    <div class="flying-elements">
+        <img class="flying-star flying-1" src="imgs/gyroid/2CVMFF6KU5UXKX4AX3YBW3KA6JW6NW2W copy.gif" alt="Flying Gyroid 1">
+        <img class="flying-comet flying-2" src="imgs/gyroid/443UXZZSZIVGUHAGTEFU7UTQ4AJ4JW55 copy.gif" alt="Flying Gyroid 2">
+        <img class="flying-rocket flying-3" src="imgs/gyroid/443UXZZSZIVGUHAGTEFU7UTQ4AJ4JW55 copy.gif" alt="Flying Gyroid 3">
+        <img class="flying-ufo flying-4" src="imgs/gyroid/5FCQZMGVOPBLQVNTIGFKL6VLLQXOMXAT copy.gif" alt="Flying Gyroid 4">
+        <img class="flying-planet flying-5" src="imgs/gyroid/6QRD6BZLZZIRYHUSJ7FZJ62UHIOYYHXA copy.gif" alt="Flying Gyroid 5">
+        <img class="flying-meteor flying-6" src="imgs/gyroid/6Y5JUF2MAHHKYN22RJPOLTMVB4ZF3CAZ copy.gif" alt="Flying Gyroid 6">
+        <img class="flying-satellite flying-7" src="imgs/gyroid/DLTFU2TKORBCSRYEH4VUP2LTHD6D4S5A copy.gif" alt="Flying Gyroid 7">
+        <img class="flying-asteroid flying-8" src="imgs/gyroid/KR2ZRWG6OG7X7ZSRJXXR3YCD3K5S2SMR copy.gif" alt="Flying Gyroid 8">
+        <img class="flying-ship flying-9" src="imgs/gyroid/KR2ZRWG6OG7X7ZSRJXXR3YCD3K5S2SMR copy.gif" alt="Flying Gyroid 9">
+    </div>
+    
     <header>
         <img class="title" src="imgs/TITLE.png" alt="Source Code Vintage">
         <h2 class="subTitle">Join The Binary Swag Club</h2>
         <img class="sword" src="imgs/sord-selected.png" alt="Sword Selected" id="sword1">
         <img class="sword2" src="imgs/sword.png" alt="Sword" id="sword2">
+        
          <nav>
             <ul>
+                <li class="music-menu-item">
+                    <button id="musicMenuToggle" class="music-icon-btn">
+                        <span class="music-icon">♫</span>
+                    </button>
+                </li>
                 <li><a href="#home">home</a></li>
                 <li><a href="#products">for sale</a></li>
                 <li><a href="#about">about</a></li>
                 <li><a href="#contact">contact</a></li>
+                <li class="settings-menu-item">
+                    <button id="settingsMenuToggle" class="settings-icon-btn">
+                        <span class="settings-icon">⚙</span>
+                    </button>
+                </li>
             </ul>
+            
+            <!-- SETTINGS MENU DROPDOWN -->
+            <div id="settingsMenu" class="settings-menu">
+                <div class="settings-menu-content">
+                    <h4>settings</h4>
+                    <div class="setting-item">
+                        <label>background animations: </label>
+                        <button id="animationToggle" class="setting-toggle-btn">
+                            <span class="toggle-text"> ON</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </nav>
 </header>
 
@@ -37,6 +78,87 @@
             <h3>何でもできる</h3>
             <p>Everything is possible</p>
             <p class="popup-quote">"You can do anything"</p>
+        </div>
+    </div>
+
+    <!-- MUSIC POPUP -->
+    <div id="musicPopup" class="music-popup-overlay">
+        <div class="music-popup-content">
+            <button class="popup-close" id="closeMusicPopup">&times;</button>
+            <div class="music-background">
+                <img src="imgs/pngs-gifs/stars.gif" class="music-bg-image">
+                <div class="music-controls-overlay">
+                    <h3>♫ Music Player ♫</h3>
+                    <div class="current-album-display">
+                        <img id="currentAlbumCover" src="imgs/5074316349984588943.jpg" alt="Current Album Cover" class="current-album-art">
+                    </div>
+                    <div class="radio-display">
+                        <div class="radio-header">
+                            <span class="radio-station">SOURCE CODE RADIO</span>
+                            <span class="frequency">108.5 FM</span>
+                        </div>
+                        <div class="now-playing-info">
+                            <div class="genre-display">
+                                <span class="genre-label">GENRE:</span>
+                                <span id="currentGenre">Hip Hop</span>
+                            </div>
+                            <div class="song-display">
+                                <span class="song-label">NOW PLAYING:</span>
+                                <span id="currentSongTitle">Song 1</span>
+                            </div>
+                        </div>
+                        <div class="radio-ticker">
+                            <div class="ticker-content">
+                                <span id="radioDescription">This is Hip Hop radio - Song 1. All songs produced by The Prophitt.</span>
+                                <span id="radioDescriptionDupe">This is Hip Hop radio - Song 1. All songs produced by The Prophitt.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="song-list">
+                        <button class="song-btn active" data-song="cyber-dreams">
+                            <img src="imgs/pngs-gifs/everythingpossible.png" alt="Hip Hop Album" class="album-cover">
+                            <span class="song-title">Hip Hop</span>
+                        </button>
+                        <button class="song-btn" data-song="neon-nights">
+                            <img src="imgs/pngs-gifs/ikeaAlien.png" alt="Smooth Jazz Album" class="album-cover">
+                            <span class="song-title">Smooth Jazz</span>
+                        </button>
+                        <button class="song-btn" data-song="digital-rain">
+                            <img src="imgs/pngs-gifs/aeroglasses.gif" alt="Ambient Album" class="album-cover">
+                            <span class="song-title">Ambient</span>
+                        </button>
+                        <button class="song-btn" data-song="retro-wave">
+                            <img src="imgs/pngs-gifs/lighting.gif" alt="House Album" class="album-cover">
+                            <span class="song-title">House</span>
+                        </button>
+                        <button class="song-btn" data-song="synthwave">
+                            <img src="imgs/pngs-gifs/bat.gif" alt="Techno Album" class="album-cover">
+                            <span class="song-title">Techno</span>
+                        </button>
+                        <button class="song-btn" data-song="lo-fi-beats">
+                            <img src="imgs/pngs-gifs/hand.png" alt="Pop Album" class="album-cover">
+                            <span class="song-title">Pop</span>
+                        </button>
+                        <button class="song-btn" data-song="synthpop">
+                            <img src="imgs/pngs-gifs/lighting2.gif" alt="Dance Album" class="album-cover">
+                            <span class="song-title">Dance</span>
+                        </button>
+                        <button class="song-btn" data-song="chillwave">
+                            <img src="imgs/pngs-gifs/us.png" alt="Funk Album" class="album-cover">
+                            <span class="song-title">Funk</span>
+                        </button>
+                        <button class="song-btn" data-song="cyberpunk">
+                            <img src="imgs/pngs-gifs/fuckedGremlin.png" alt="Spooky Album" class="album-cover">
+                            <span class="song-title">Spooky</span>
+                        </button>
+                    </div>
+                    <div class="music-controls">
+                        <button id="playPauseBtn" class="control-btn">⏸</button>
+                        <button id="volumeBtn" class="control-btn">🔊</button>
+                        <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -109,25 +231,98 @@
                     <button>buy</button>
                 </a>
             </div>
+            
         </div>
         
         <!-- COLLECTABLES -->
-        <h2>collectables</h2>
+        <h2 id="collectables">collectables</h2>
         <div class="product-container1">
             <div class="product-card1">
-                <h3>Coming Soon</h3>
-                <img src="imgs/pngs-gifs/comin.png" class="P1" alt="Coming Soon">
-                <h5>unique collectibles</h5>
-                <p><strong>$TBD</strong></p>
-                <a href="#" target="_blank">
-                    <button>coming soon</button>
+                <h3>Tiny (Devil's Rejects)</h3>
+                <img src="imgs/FELLAS/super8.png" class="P1" alt="Tiny Action Figure">
+                <h5>NECA Action Figure</h5>
+                <p><strong>$200</strong></p>
+                <a href="#contact">
+                    <button>Contact</button>
+                </a>
+            </div>
+            <div class="product-card1">
+                <h3>Dylan (Charlie's Angels)</h3>
+                <img src="imgs/FELLAS/super2.png" class="P1" alt="Dylan Doll">
+                <h5>JakksPacific Doll</h5>
+                <p><strong>$50</strong></p>
+                <a href="#collectables">
+                    <button>Sold</button>
+                </a>
+            </div>
+            <div class="product-card1">
+                <h3>Natalie (Charlie's Angels)</h3>
+                <img src="imgs/FELLAS/super3.png" class="P1" alt="Natalie Doll">
+                <h5>JakksPacific Doll</h5>
+                <p><strong>$45</strong></p>
+                <a href="#collectables">
+                    <button>Sold</button>
+                </a>
+            </div>
+            <div class="product-card1">
+                <h3>Mummy (Universal Monsters)</h3>
+                <img src="imgs/FELLAS/super4.png" class="P1" alt="Mummy Doll">
+                <h5>JakksPacific Doll</h5>
+                <p><strong>$60</strong></p>
+                <a href="#contact">
+                    <button>Contact</button>
+                </a>
+            </div>
+            <div class="product-card1">
+                <h3>Buffy the Vampire Slayer</h3>
+                <img src="imgs/FELLAS/super10.png" class="P1" alt="Comic Book">
+                <h5>Series 1e</h5>
+                <p><strong>$45</strong></p>
+                <a href="#collectables">
+                    <button>Sold</button>
+                </a>
+            </div>
+            <div class="product-card1">
+                <h3>Anakin to Darth Vader</h3>
+                <img src="imgs/FELLAS/super.png" class="P1" alt="Gaming Controller">
+                <h5>Star Wars. Light Saber Changes Color.</h5>
+                <p><strong>unavailable</strong></p>
+                <a href="#collectables">
+                    <button>NFS</button>
+                </a>
+            </div>
+            <div class="product-card1">
+                <h3>Superman</h3>
+                <img src="imgs/FELLAS/super1.png" class="P1" alt="Alien Figure">
+                <h5>Movie Masters Man of Steel Figurine</h5>
+                <p><strong>$20</strong></p>
+                <a href="#collectables">
+                    <button>Sold</button>
+                </a>
+            </div>
+            <div class="product-card1">
+                <h3>Captain Lucas Wolenczak (SeaQuest)</h3>
+                <img src="imgs/FELLAS/super7.png" class="P1" alt="Vintage Glasses">
+                <h5>PlayMates Figure</h5>
+                <p><strong>$20</strong></p>
+                <a href="#collectables">
+                    <button>Sold</button>
+                </a>
+            </div>
+            <div class="product-card1">
+                <h3>Captain Nathan Hale Bridger (Sea Quest)</h3>
+                <img src="imgs/FELLAS/super5.png" class="P1" alt="Vintage Glasses">
+                <h5>PlayMates Figure</h5>
+                <p><strong>$20</strong></p>
+                <a href="#collectables">
+                    <button>Sold</button>
                 </a>
             </div>
         </div>
     </section>        
     <section id="about">
         <h2>about us</h2>
-        <img class="BN" src="imgs/pngs-gifs/BN1.png">
+        <video src="us.mp4" class="BN" autoplay loop muted type="video/mp4"></video>
 
         <p>BUGS + PROPHITT</p>
         <h6>Source Code Vintage is a small business created by Bugs and Prophitt. We are a couple who have recently relocated from Chicago to Rochester, NY. We at Source Code have spent our whole lives acquiring, curating, and creating one of kind pieces and can't wait to share them with like-minded individuals. We have unique items in many ranges of styles and pricing that you wont find anywhere else. Some items available online. Find us in person at one of our events, inquire below! </h6>
@@ -135,9 +330,11 @@
     <section id="contact">
         <h2>contact</h2>
         <p><a href="#" target="_blank" >sourcecodevintage@gmail.com</a></p>
-       <p><a href="#" target="_blank" >@sourcecodevintage
+        <p><a href="#" target="_blank" >@sourcecodevintage
        </a></p>
-              <img src="imgs/SOURCE-CODE-FRONT.png">
+       <div class="contact-image-spacer">
+              <img src="imgs/sourcecodevintage copy.png">
+       </div>
     </section>
 </main>
 <footer>
