@@ -105,7 +105,7 @@ header {
     width: auto;
     max-width: 600px;
     height: auto;
-    margin-top: -3px;
+    margin-top: 10px;
 }
 .subTitle
 {
@@ -144,6 +144,7 @@ main {
     margin: auto;
     position: relative;
     z-index: 2;
+    transition: all 0.3s ease; /* Smooth transitions for responsive changes */
 }
 
 section {
@@ -154,12 +155,14 @@ section {
     justify-content: center;
     align-items: center;
     position: relative;
+    transition: all 0.3s ease; /* Smooth padding and margin transitions */
 }
 
 section#home { display: none; }
 
 .main-content {
     margin-top: 160px;
+    transition: margin-top 0.3s ease; /* Smooth margin transitions */
 }
 
 /* BACKGROUND IMAGES (Static) */
@@ -213,12 +216,14 @@ nav ul {
     display: flex;
     gap: 20px;
     align-items: center;
+    transition: all 0.3s ease; /* Smooth transitions for responsive changes */
 }
 
 nav ul li a {
     color: #00ff00;
     text-decoration: none;
     font-size: 18px;
+    transition: all 0.3s ease; /* Smooth font size and padding transitions */
 }
 
 nav ul li a:hover {
@@ -238,10 +243,12 @@ nav ul li a:hover
     padding: 20px;
     border-radius: 5px;
     margin: 10px;
+    transition: all 0.3s ease; /* Smooth transitions for responsive changes */
 }
 
 .product-card h3, .product-card1 h3 {
     margin-top: 0;
+    transition: font-size 0.3s ease;
 }
 
 .product-card button, .product-card1 button {
@@ -252,6 +259,7 @@ nav ul li a:hover
     padding: 10px 20px;
     text-transform: uppercase;
     font-family: Consolas, Courier, monospace;
+    transition: all 0.3s ease;
 }
 
 .product-card button:hover, .product-card1 button:hover {
@@ -260,6 +268,7 @@ nav ul li a:hover
 
 .P1 {
     width: 100%;
+    transition: width 0.3s ease;
 }
 
 .product-container, .product-container1 {
@@ -268,6 +277,7 @@ nav ul li a:hover
     justify-content: center;
     gap: 20px;
     margin: 10px 0;
+    transition: all 0.3s ease; /* Smooth layout transitions */
 }
 
 /* FOOTER */
@@ -285,36 +295,469 @@ footer {
 }
 
 /* RESPONSIVE */
-@media (max-width: 768px) {
+/* Mobile-first: Single column layout for phones */
+@media (max-width: 450px) {
+    body {
+        font-size: 16px;
+    }
+    
     .title {
-        max-width: 300px;
-        margin-top: -6px;
+        max-width: 280px;
+        margin-top: 8px;
     }
-    header
-    {
-        height: 123px;
+    
+    header {
+        height: 170px;
+        padding: 15px 5px;
     }
-    .subTitle
-    {
-        font-size: 19px;
+    
+    .subTitle {
+        font-size: 18px;
+        padding: 0 10px;
+        text-align: center;
     }
+    
     .sword, .sword2 {
-        right: 10px;
-        height: 100px;
+        right: 5px;
+        height: 120px;
     }
     
     nav ul {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row;
+        gap: 5px;
+        padding: 8px 0;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
     }
     
+    nav ul li a {
+        font-size: 12px;
+        padding: 4px 6px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 100%;
+        padding: 10px 5px;
+        margin-top: 180px;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    section {
+        padding: 15px 5px;
+        margin-bottom: 30px;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    section h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    /* FORCE single column layout for product cards */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
+        margin: 25px 0 !important;
+        width: 100% !important;
+        justify-content: center !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: 95% !important;
+        max-width: 320px !important;
+        margin: 0 auto !important;
+        padding: 20px 15px !important;
+        text-align: center !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+        border: 1px solid #00ff00 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+    }
+    
+    .product-card h3, .product-card1 h3 {
+        font-size: 18px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .product-card h5, .product-card1 h5 {
+        font-size: 14px !important;
+        margin: 8px 0 !important;
+    }
+    
+    .product-card p, .product-card1 p {
+        font-size: 16px !important;
+        margin: 10px 0 !important;
+    }
+    
+    .product-card button, .product-card1 button {
+        width: 100% !important;
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+        margin-top: 12px !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 280px !important;
+        object-fit: contain !important;
+    }
+    
+    .BN {
+        width: 85% !important;
+        margin: 20px auto !important;
+    }
+    
+    /* Hide decorative elements on mobile */
     .lighting, .bat, .alien, .us {
         display: none;
     }
-    nav ul
-    {
+    
+    /* Hide flying elements for performance */
+    .flying-elements {
+        display: none;
+    }
+    
+    /* Mobile popup adjustments */
+    .popup-content {
+        width: 95%;
+        margin: 10px;
+        padding: 20px 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .music-popup-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 50px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        min-width: 280px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .settings-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    .glasses {
+        width: 60px;
+        margin: 15px;
+    }
+    
+    /* Ensure everything is visible except settings when closed */
+    * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .settings-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
         flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 191% !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        min-width: 250px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+    }
+    
+    .settings-menu.active {
+        transform: translate(-50%, -50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 12px !important;
+        padding: 4px 6px !important;
+    }
+    
+    /* Hide some decorative elements */
+    .lighting, .bat, .alien, .us {
+        display: none;
+    }
+}
+
+/* Tablets */
+@media (min-width: 651px) and (max-width: 768px) {
+    .title {
+        max-width: 350px;
+        margin-top: 5px;
+    }
+    
+    header {
+        height: 160px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 15px;
+        height: 150px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        gap: 15px;
         padding-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    main {
+        width: 92%;
+        margin-top: 170px;
+    }
+    
+    /* Three-column layout for tablets */
+    .product-container, .product-container1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(33.333% - 12px);
+        max-width: 220px;
+        min-width: 180px;
+        margin: 5px;
+    }
+    
+    .BN {
+        width: 60%;
+    }
+    
+    /* Settings menu adjustments for tablets */
+    .settings-menu {
+        position: fixed !important;
+        top: 242% !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        min-width: 300px !important;
+        max-width: 80vw !important;
+        z-index: 9999 !important;
+    }
+    
+    .settings-menu.active {
+        transform: translate(-50%, -50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 16px !important;
+        padding: 6px 8px !important;
+    }
+    
+    /* Hide decorative elements on tablets */
+    .lighting, .bat, .alien, .us {
+        display: none;
+    }
+}
+
+/* Large tablets and small desktops */
+@media (min-width: 769px) and (max-width: 1024px) {
+    main {
+        width: 90%;
+        margin-top: 170px;
+    }
+    
+    /* Four-column layout */
+    .product-container, .product-container1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(25% - 12px);
+        max-width: 200px;
+        min-width: 180px;
+        margin: 5px;
+    }
+    
+    .BN {
+        width: 50%;
+    }
+    
+    /* Settings menu adjustments for large tablets */
+    .settings-menu {
+        position: absolute !important;
+        top: 100% !important;
+        right: 0 !important;
+        left: auto !important;
+        transform: translateY(0) !important;
+        min-width: 220px !important;
+        max-width: none !important;
+        z-index: 1002 !important;
+    }
+    
+    .settings-menu.active {
+        transform: translateY(0) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 18px !important;
+        padding: 8px 10px !important;
+    }
+}
+
+/* Desktop and larger */
+@media (min-width: 1025px) {
+    /* Original multi-column layout */
+    .product-container, .product-container1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin: 10px 0;
+    }
+    
+    .product-card, .product-card1 {
+        width: 200px;
+        margin: 10px;
+    }
+    
+    .BN {
+        width: 47%;
+    }
+    
+    /* Settings menu desktop styles */
+    .settings-menu {
+        position: absolute !important;
+        top: 100% !important;
+        right: 0 !important;
+        left: auto !important;
+        transform: translateY(0) !important;
+        min-width: 200px !important;
+        max-width: none !important;
+        z-index: 1002 !important;
+    }
+    
+    .settings-menu.active {
+        transform: translateY(0) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 18px !important;
+        padding: 8px 10px !important;
     }
 }
 
