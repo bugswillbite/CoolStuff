@@ -1,0 +1,315 @@
+/* GENERAL */
+body 
+{
+    color: rgb(35, 203, 49);
+    font-family: Consolas, Courier, monospace;
+    font-size: 20px;
+    text-shadow: 0 0 15px #411;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+header 
+{
+    padding: 20px;
+    font-family: Consolas, Courier, monospace;
+    background-image: url('../imgs/stars.gif');
+    position: fixed;
+    width: 100vw;
+    z-index: 1000;
+}
+.title
+{
+    position: relative;
+}
+@media (max-width: 460px) { .title {width: 244px;} }
+
+.sword, .sword2
+{
+    position: absolute;
+    top: 0;
+    left: 1006px;
+    height: 220%;
+}
+.sword:hover
+{
+    opacity: 100%;
+    transition: 3s ease-in-out;
+}
+.sword2:hover
+{
+    opacity: 0%;
+    transition: 3s ease-in-out;
+}
+main 
+{
+    padding: 20px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+
+}
+section 
+{
+    flex: 0 0 100%;
+    /* background-color: green; */
+    margin-bottom: 40px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+section#home { display: none; }
+.main-content
+{    margin-top: 160px;}
+
+footer {
+    background-color: #141414;
+    padding: 20px;
+}
+
+/* IMGS */
+.lighting 
+{
+    display: block;
+    position:absolute;
+  margin-left: -60px;
+  margin-top: -150px;
+  width: 30%;
+}
+.bat
+{
+    display: block;
+    position: absolute;
+    margin-left: 300px;
+    margin-top: 30px;
+    width: 10%;
+}
+.alien 
+{
+    display: block;
+  position: absolute;
+  margin-left: 930px;
+  margin-top: -76px;
+  width: 5%;
+}
+.BN {
+    width: 15%;
+}
+
+.us {
+    width: 25.5%;
+    margin-left: -659.5px;
+    margin-top: -304px;
+    position: absolute;
+    }
+
+/* buttons */
+button
+{
+    font-family: Consolas, Courier, monospace;
+    font-size: 20px;
+}
+.button1{
+    font-family: Consolas, Courier, monospace;
+    font-size: 20px;
+}
+
+/* TEXT/UL */
+header h1 
+{
+    font-size: 3em;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    opacity: 100;
+    font-family: Consolas, Courier, monospace;  
+}
+nav ul 
+{
+    list-style-type: none;
+    padding: 0;
+}
+nav ul li 
+{
+    display: inline;
+    margin: 0 15px;
+}
+nav ul li a 
+{
+    color: #00ff00;
+    text-decoration: none;
+}
+nav ul li a:hover 
+{
+    text-decoration: underline;
+}
+
+/* PRODUCT CARDS */
+/* 0:SHIRTS */
+.product-card 
+{
+    width: 200px;
+    flex: 1 0 auto; 
+    text-align: center;
+    background: #000000;
+    border: 1px solid #00ff00;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 5px;
+}
+.product-card h3 
+{
+    margin-top: 0;
+}
+.product-card button 
+{
+    background-color: #00ff00;
+    border: none;
+    color: #0a0a0a;
+    cursor: pointer;
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+.product-card button:hover 
+{
+    background-color: #009900;
+}
+.P1
+{
+     width:100%
+}
+.product-container 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+    margin: auto;
+}
+.product-wrapper 
+{
+    overflow: scroll;
+    width: 800px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+}
+
+@media (max-width: 460px) { .product-wrapper {width: 244px;} }
+@media (min-width: 461px) { .product-wrapper {width: 248px;} }
+@media (min-width: 600px) { .product-wrapper {width: 555px;} }
+@media (min-width: 701px) { .product-wrapper {width: 644px;} }
+@media (min-width: 901px) { .product-wrapper {width: 800px;} }
+.product-list 
+{
+    display: flex;
+    flex-wrap: nowrap; 
+    gap: 10px;
+    transition: transform 0.5s ease-in-out;
+}
+.scroll-btn 
+{
+    background: #000;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.scroll-btn.left 
+{
+    left: -4px;
+}
+
+.scroll-btn.right 
+{
+    right: -4px;
+}
+.scroll-btn:hover 
+{
+    background-color: #006600; 
+}
+/* 1:COLLECTABLES */
+.product-card1 {
+    width: 200px;
+    flex: 0 0 auto; /* Prevent shrinking */
+    text-align: center;
+    background: #000000;
+    border: 1px solid #00ff00;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 5px;
+}
+.product-card1 h3 
+{
+    margin-top: 0;
+}
+.product-card1 button 
+{
+    background-color: #00ff00;
+    border: none;
+    color: #0a0a0a;
+    cursor: pointer;
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+.product-card1 button:hover 
+{
+    background-color: #009900;
+}
+.product-container1 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 800px; 
+    margin: auto;
+}
+.product-wrapper1 
+{
+    overflow: scroll;
+    width: 800px; 
+      scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.product-list1 
+{
+    display: flex;
+    flex-wrap: nowrap; 
+    gap: 10px;
+    transition: transform 0.5s ease-in-out;
+}
+.scroll-btn1 {
+    background: #000;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.scroll-btn.left1 
+{
+    left: -4px;
+}
+.scroll-btn.right1 
+{
+    right: -4px;
+}
+
+
+  
