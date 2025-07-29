@@ -22,8 +22,12 @@ header
 .title
 {
     position: relative;
+    margin: 0 auto;
 }
-@media (max-width: 460px) { .title {width: 244px;} }
+@media (max-width: 460px) { .title {width: 358px; left: -30px;} }
+@media (min-width: 461px) { .title {width: 484px; left: -30px;} }
+@media (min-width: 600px) { .title {width: 600px; left: -30px;} }
+@media (min-width: 800px) { .title {width: auto; left: -30px;} }
 
 .sword, .sword2
 {
