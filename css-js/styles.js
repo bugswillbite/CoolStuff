@@ -286,61 +286,70 @@ document.addEventListener("DOMContentLoaded", function () {
         let isMuted = false;
         let currentVolume = 0.5;
 
-        // Song data (you can replace these with actual audio file URLs)
+        // Song data with MP4 placeholder files
         const songs = {
             'cyber-dreams': {
                 name: 'Hip Hop',
-                songTitle: 'Song 1',
+                songTitle: 'Cyber Dreams',
                 albumCover: 'imgs/pngs-gifs/everythingpossible.png',
-                url: 'music/cyber-dreams.mp3' // Replace with actual audio file
+                url: 'music/hip-hop.mp4', // MP4 placeholder
+                description: 'This is Hip Hop radio - Cyber Dreams. All songs produced by The Prophitt.'
             },
             'neon-nights': {
                 name: 'Smooth Jazz',
-                songTitle: 'Song 2',
+                songTitle: 'Neon Nights',
                 albumCover: 'imgs/pngs-gifs/ikeaAlien.png',
-                url: 'music/neon-nights.mp3' // Replace with actual audio file
+                url: 'music/smooth-jazz.mp4', // MP4 placeholder
+                description: 'This is Smooth Jazz radio - Neon Nights. All songs produced by The Prophitt.'
             },
             'digital-rain': {
                 name: 'Ambient',
-                songTitle: 'Song 3',
+                songTitle: 'AMBIENTSONG',
                 albumCover: 'imgs/pngs-gifs/aeroglasses.gif',
-                url: 'music/digital-rain.mp3' // Replace with actual audio file
+                url: 'music/ambient.mp4', // MP4 placeholder
+                description: 'This is Ambient radio - Digital Rain. All songs produced by The Prophitt.'
             },
             'retro-wave': {
                 name: 'House',
-                songTitle: 'Song 4',
+                songTitle: 'REFRIDGERATOR RUNNIN',
                 albumCover: 'imgs/pngs-gifs/lighting.gif',
-                url: 'music/retro-wave.mp3' // Replace with actual audio file
+                url: 'music/refridgerator_runnin_101 HOUSE.mp3',
+                description: 'This is House radio - Retro Wave. All songs produced by The Prophitt.'
             },
             'synthwave': {
                 name: 'Techno',
-                songTitle: 'Song 5',
+                songTitle: 'Synthwave',
                 albumCover: 'imgs/pngs-gifs/bat.gif',
-                url: 'music/synthwave.mp3' // Replace with actual audio file
+                url: 'music/techno.mp4', // MP4 placeholder
+                description: 'This is Techno radio - Synthwave. All songs produced by The Prophitt.'
             },
             'lo-fi-beats': {
                 name: 'Pop',
-                songTitle: 'Song 6',
+                songTitle: 'Lo-Fi Beats',
                 albumCover: 'imgs/pngs-gifs/hand.png',
-                url: 'music/lo-fi-beats.mp3' // Replace with actual audio file
+                url: 'music/pop.mp4', // MP4 placeholder
+                description: 'This is Pop radio - Lo-Fi Beats. All songs produced by The Prophitt.'
             },
             'synthpop': {
                 name: 'Dance',
-                songTitle: 'Song 7',
+                songTitle: 'Synthpop',
                 albumCover: 'imgs/pngs-gifs/lighting2.gif',
-                url: 'music/synthpop.mp3' // Replace with actual audio file
+                url: 'music/dance.mp4', // MP4 placeholder
+                description: 'This is Dance radio - Synthpop. All songs produced by The Prophitt.'
             },
             'chillwave': {
                 name: 'Funk',
-                songTitle: 'Song 8',
+                songTitle: 'Chillwave',
                 albumCover: 'imgs/pngs-gifs/us.png',
-                url: 'music/chillwave.mp3' // Replace with actual audio file
+                url: 'music/funk.mp4', // MP4 placeholder
+                description: 'This is Funk radio - Chillwave. All songs produced by The Prophitt.'
             },
             'cyberpunk': {
                 name: 'Spooky',
-                songTitle: 'Song 9',
+                songTitle: 'Cyberpunk',
                 albumCover: 'imgs/pngs-gifs/fuckedGremlin.png',
-                url: 'music/cyberpunk.mp3' // Replace with actual audio file
+                url: 'music/spooky.mp4', // MP4 placeholder
+                description: 'This is Spooky radio - Cyberpunk. All songs produced by The Prophitt.'
             }
         };
 
@@ -360,21 +369,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Play selected song
         function playSong(songId) {
-            currentSong = songId;
             const song = songs[songId];
             
-            // Update current album cover
+            // Stop current audio if playing
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            
+            // Create new audio element
+            currentAudio = new Audio();
+            currentAudio.src = song.url;
+            currentAudio.volume = currentVolume;
+            
+            // Update display elements
             const currentAlbumCover = document.getElementById('currentAlbumCover');
             if (currentAlbumCover) {
                 currentAlbumCover.src = song.albumCover;
             }
             
-            // Update now playing text
-            document.getElementById('nowPlaying').textContent = `${song.name}`;
-            document.getElementById('currentSongTitle').textContent = song.songTitle;
+            // Update genre and song title
+            currentGenre.textContent = song.name;
+            currentSongTitle.textContent = song.songTitle;
+            
+            // Update radio description ticker
+            radioDescription.textContent = song.description;
+            radioDescriptionDupe.textContent = song.description;
             
             // Remove active class from all song buttons
-            const songButtons = document.querySelectorAll('.song-btn');
             songButtons.forEach(btn => btn.classList.remove('active'));
             
             // Add active class to selected song button
@@ -383,12 +405,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectedButton.classList.add('active');
             }
             
-            // Update the play/pause button to show "pause" when playing
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            playPauseBtn.textContent = '⏸️';
-            isPlaying = true;
+            // Start playing the song
+            currentAudio.play().then(() => {
+                isPlaying = true;
+                playPauseBtn.textContent = '⏸';
+                console.log(`Now playing: ${song.name} - ${song.songTitle}`);
+            }).catch(error => {
+                console.log('Audio playback failed:', error);
+                // For demo purposes, still update the UI even if audio fails
+                isPlaying = true;
+                playPauseBtn.textContent = '⏸';
+                console.log(`Demo mode: ${song.name} - ${song.songTitle}`);
+            });
             
-            console.log(`Playing: ${song.name} - ${song.songTitle}`);
+            // Handle audio end event
+            currentAudio.addEventListener('ended', () => {
+                isPlaying = false;
+                playPauseBtn.textContent = '▶';
+            });
         }
 
         // Toggle play/pause
@@ -404,8 +438,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         playPauseBtn.textContent = '⏸';
                     }).catch(error => {
                         console.log('Play was prevented:', error);
+                        // Demo mode - still update UI
+                        isPlaying = true;
+                        playPauseBtn.textContent = '⏸';
                     });
                 }
+            } else {
+                // If no audio is loaded, start with first song
+                playSong('cyber-dreams');
             }
         }
 
@@ -577,6 +617,137 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // SCROLLING IMAGES CLICK FUNCTIONALITY
+    function setupScrollingImagesClick() {
+        const scrollImages = document.querySelectorAll('.scroll-img');
+        
+        scrollImages.forEach(img => {
+            img.addEventListener('click', function() {
+                // Navigate to the collectables section
+                document.getElementById('collectables').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    }
+
+    // DUAL SCROLL FUNCTIONALITY (Auto + Manual)
+    function setupDualScrolling() {
+        const scrollContainer = document.querySelector('.scrolling-container');
+        const scrollImages = document.querySelector('.scrolling-images');
+        
+        if (!scrollContainer || !scrollImages) return;
+        
+        let scrollTimeout;
+        let isUserScrolling = false;
+        let lastScrollLeft = 0;
+        let scrollCheckInterval;
+        
+        // Ensure auto-scroll is active on page load
+        scrollImages.classList.remove('paused');
+        
+        // Pause auto-scroll when user manually scrolls
+        function pauseAutoScroll() {
+            isUserScrolling = true;
+            scrollImages.classList.add('paused');
+            
+            // Clear existing timeout
+            clearTimeout(scrollTimeout);
+            
+            // Start checking if user has stopped scrolling
+            startScrollCheck();
+        }
+        
+        // Check if user has stopped scrolling
+        function startScrollCheck() {
+            clearInterval(scrollCheckInterval);
+            
+            scrollCheckInterval = setInterval(() => {
+                const currentScrollLeft = scrollContainer.scrollLeft;
+                
+                // If scroll position hasn't changed for 500ms, user has stopped
+                if (currentScrollLeft === lastScrollLeft) {
+                    // User has stopped scrolling, resume auto-scroll after 500ms more
+                    clearInterval(scrollCheckInterval);
+                    scrollTimeout = setTimeout(() => {
+                        isUserScrolling = false;
+                        scrollImages.classList.remove('paused');
+                    }, 500);
+                }
+                
+                lastScrollLeft = currentScrollLeft;
+            }, 500); // Check every 500ms
+        }
+        
+        // Handle infinite scroll loop (seamless transition)
+        function handleInfiniteScroll() {
+            const scrollLeft = scrollContainer.scrollLeft;
+            const scrollWidth = scrollContainer.scrollWidth;
+            const clientWidth = scrollContainer.clientWidth;
+            const maxScroll = scrollWidth - clientWidth;
+            
+            // Calculate the width of one complete set of images (including gaps)
+            const images = scrollContainer.querySelectorAll('.scroll-img');
+            
+            // Get actual image dimensions and gap from current viewport
+            const imageStyle = window.getComputedStyle(images[0]);
+            const imageWidth = parseInt(imageStyle.width);
+            const containerStyle = window.getComputedStyle(scrollImages);
+            const gap = parseInt(containerStyle.gap);
+            
+            const oneSetWidth = (imageWidth + gap) * (images.length / 2); // Divide by 2 since images are duplicated
+            
+            // When we've scrolled past one complete set, reset to beginning
+            if (scrollLeft >= oneSetWidth) {
+                scrollContainer.scrollLeft = scrollLeft - oneSetWidth;
+            }
+        }
+        
+        // Handle manual scrolling with infinite loop
+        scrollContainer.addEventListener('scroll', function() {
+            handleInfiniteScroll();
+            if (!isUserScrolling) {
+                pauseAutoScroll();
+            }
+        });
+        
+        // Handle touch scrolling on mobile
+        scrollContainer.addEventListener('touchstart', function() {
+            pauseAutoScroll();
+        });
+        
+        scrollContainer.addEventListener('touchmove', function() {
+            pauseAutoScroll();
+        });
+        
+        // Handle mouse wheel scrolling
+        scrollContainer.addEventListener('wheel', function(e) {
+            if (e.deltaY !== 0) {
+                // Convert vertical scroll to horizontal scroll
+                e.preventDefault();
+                scrollContainer.scrollLeft += e.deltaY;
+                pauseAutoScroll();
+            }
+        });
+        
+        // Handle keyboard navigation
+        scrollContainer.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                scrollContainer.scrollLeft -= 50; // Scroll by 50px increments
+                pauseAutoScroll();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                scrollContainer.scrollLeft += 50; // Scroll by 50px increments
+                pauseAutoScroll();
+            }
+        });
+        
+        // Make container focusable for keyboard navigation
+        scrollContainer.setAttribute('tabindex', '0');
+    }
+
     // INITIALIZE EVERYTHING
     addScrollAnimations();
     observeElements();
@@ -587,5 +758,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setupMusicPlayer();
     setupResponsiveBehavior();
     setupTouchGestures();
+    setupScrollingImagesClick();
+    setupDualScrolling();
 });
-
