@@ -1,375 +1,2144 @@
-<!DOCTYPE html>
-<html lang="en">
+/* RESET & GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Source Code Vintage</title>
-    <link rel="stylesheet" href="css-js/style.css">
-    <script defer src="css-js/styles.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Limelight&family=Nabla&family=Savate:ital,wght@0,200..900;1,200..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=VT323&display=swap" rel="stylesheet">
-</head>
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
-<body>
-    <!-- BACKGROUND ELEMENTS (Static) -->
-    <img class="lighting" src="imgs/pngs-gifs/lighting.gif" alt="Lightning">
-    <img class="bat" src="imgs/pngs-gifs/bat.gif" alt="Bat">
-    <img class="alien" src="imgs/pngs-gifs/ikeaAlien.png" alt="Alien">
+body {
+    color: rgb(35, 203, 49);
+    font-family: Consolas, Courier, monospace;
+    font-size: 20px;
+    text-shadow: 0 0 15px #411;
+    background-image: url(../imgs/stars.gif);
+    overflow-x: hidden;
+    overflow-y: auto;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23FFD700"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>') 12 12, auto;
+}
+.POP
+{
+font-family: "Nabla", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "EDPT" 100,
+    "EHLT" 12;
+
+    font-size: 50px;
+}
+.subTitle
+{
+    font-size: 20px;
+    margin: 0 auto;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    will-change: opacity, transform;
+}
+.names
+{
+    position: relative;
+    max-width: 420px;
+}
+h6
+{
+    max-width: 800px;
+    padding: 20px;
+    margin: 0 auto;
+    font-size: 30px;
+    text-align: center;
+}
+
+/* Remove default margins from headings */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+  text-transform: capitalize;
+}
+h6
+{
+    text-transform: none !important;
+}
+.contactTXT
+{
+    font-size: auto;
+    color: #00ff00;
+    text-decoration: none;
+}
+/* SCROLL ANIMATION CLASSES */
+.fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* FIXED HEADER */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 195px;
+    padding: 20px;
+    background-image: url('../imgs/stars.gif');
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    width: auto;
+    max-width: 600px;
+    height: auto;
+    margin-top: 20px;
+}
+.subTitle
+{
+ font-size: 30px;
+}
+.sword, .sword2 {
+    position: absolute;
+    top: -4px;
+    right: -136px;
+    height: 578px;
+    transition: opacity 3s ease-in-out;
+}
+
+.sword:hover {
+    opacity: 1;
+}
+
+.sword2:hover {
+    opacity: 0;
+}
+/* PARALLAX LAYERS */
+.parallax-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* MAIN CONTENT */
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease; /* Smooth transitions for responsive changes */
+}
+
+section {
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease; /* Smooth padding and margin transitions */
+}
+
+section#home { 
+    display: block;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* SCROLLING IMAGES CONTAINER */
+.scrolling-container {
+    width: 100%;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    overflow-y: hidden;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8));
+    position: relative;
+    margin: 200px 0 0 0;
+    padding: 30px 0 0 0;
+    scrollbar-width: none; /* Firefox - hide scrollbar */
+    -ms-overflow-style: none; /* IE/Edge - hide scrollbar */
+    --image-size: 220px;
+    --image-gap: 25px;
+}
+
+/* Hide scrollbar for webkit browsers */
+.scrolling-container::-webkit-scrollbar {
+    display: none;
+}
+
+.scrolling-images {
+    display: flex;
+    gap: var(--image-gap);
+    align-items: center;
+    padding: 0 20px 0 20px;
+    width: max-content; /* Allow content to extend beyond container */
+    animation: scrollLeft 35s linear infinite; /* Auto-scroll enabled by default */
+}
+
+/* Add immediate connection between last and first image */
+.scrolling-images::after {
+    content: '';
+    width: var(--image-gap); /* Same as gap to maintain consistent spacing */
+    flex-shrink: 0;
+}
+
+.scrolling-images.paused {
+    animation-play-state: paused; /* Pause auto-scroll when manually scrolling */
+}
+
+.scroll-img {
+    height: var(--image-size);
+    width: var(--image-size);
+    object-fit: cover;
+    border: none;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transform-origin: center center;
+    box-shadow: 
+        0 0 5px rgba(35, 203, 49, 0.2),
+        0 0 10px rgba(35, 203, 49, 0.1),
+        0 5px 10px rgba(35, 203, 49, 0.15); /* Softer bottom shadow */
+}
+
+.scroll-img:hover {
+    transform: scale(1.15);
+    animation-play-state: paused;
+    z-index: 10;
+    position: relative;
+    box-shadow: 
+        0 0 20px rgba(35, 203, 49, 0.5),
+        0 0 35px rgba(35, 203, 49, 0.3),
+        0 10px 20px rgba(35, 203, 49, 0.25); /* Softer enhanced bottom shadow on hover */
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Move by exactly one set of images using CSS variables */
+        transform: translateX(calc(-10 * (var(--image-size) + var(--image-gap))));
+    }
+}
+
+.main-content {
+    margin-top: 45px;
+    transition: margin-top 0.3s ease; /* Smooth margin transitions */
+}
+
+/* BACKGROUND IMAGES (Static) */
+.lighting {
+    position: absolute;
+    top: 200px;
+    left: -60px;
+    width: 30%;
+    z-index: 1;
+}
+
+.bat {
+    position: absolute;
+    top: 300px;
+    right: 200px;
+    width: 10%;
+    z-index: 1;
+}
+
+.alien {
+    position: absolute;
+    top: 150px;
+    right: 50px;
+    width: 5%;
+    z-index: 1;
+}
+
+.us {
+position: absolute;
+  bottom: -3850px;
+  left: 28px;
+  width: 30%;
+  z-index: 999;
+}
+
+.BN {
+    width: 47%;
+    margin: 20px 0;
+    z-index: 0;
+}
+
+/* NAVIGATION */
+nav {
+    transition: transform 0.3s ease;
+    will-change: transform;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    transition: all 0.3s ease; /* Smooth transitions for responsive changes */
+}
+
+nav ul li a {
+    color: #00ff00;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.3s ease; /* Smooth font size and padding transitions */
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+nav ul li a:hover 
+{
+    text-decoration: underline;
+}
+
+/* PRODUCT CARDS */
+.product-card, .product-card1 {
+    width: 200px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #00ff00;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 10px;
+    transition: all 0.3s ease; /* Smooth transitions for responsive changes */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 350px;
+}
+
+.product-card h3, .product-card1 h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    transition: font-size 0.3s ease;
+    height: auto;
+    min-height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    text-align: center;
+    padding: 0 5px;
+}
+
+.product-card .P1, .product-card1 .P1 {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 3px;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.product-card h5, .product-card1 h5 {
+    margin: 10px 0;
+    height: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-card p, .product-card1 p {
+    margin: 10px 0;
+    height: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-card button, .product-card1 button {
+    background-color: #00ff00;
+    border: none;
+    color: #0a0a0a;
+    cursor: pointer;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-family: Consolas, Courier, monospace;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.product-card button:hover, .product-card1 button:hover {
+    background-color: #009900;
+}
+
+.P1 {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.3s ease;
+}
+
+.product-container, .product-container1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 10px 0;
+    transition: all 0.3s ease; /* Smooth layout transitions */
+}
+
+/* FOOTER */
+footer {
+    background-color: #141414;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    margin-left: -20px;
+    width: 100vw;
+    max-width: 100vw;
+    overflow: hidden;
+}
+footer.foot2
+{
+    background-color: green;
+    z-index: 9999;
+    position: relative;
+}
+
+.glasses {
+    width: 100px;
+    margin: 20px;
+}
+
+/* RESPONSIVE */
+/* Mobile-first: Single column layout for phones */
+@media (max-width: 450px) {
+    body {
+        font-size: 16px;
+    }
+    section#home
+    {
+            margin-top: -196px;
+
+    }
+        h6
+    {
+        max-width: 358px;
+    }
+    h6.description
+    {
+        font-size: 20px;
+    }
+    img.bizcard
+    {
+        max-width: 335px !important;
+    }
+    .names
+    {
+        max-width: 357px;
+    }
+    .title {
+        max-width: 360px;
+        margin-top: 38px;
+        margin-left: -30px;
+    }
     
-    <!-- FLYING ANIMATED ELEMENTS -->
-    <div class="flying-elements">
-        <img class="flying-star flying-1" src="imgs/gyroid/2CVMFF6KU5UXKX4AX3YBW3KA6JW6NW2W copy.gif" alt="Flying Gyroid 1">
-        <img class="flying-comet flying-2" src="imgs/gyroid/443UXZZSZIVGUHAGTEFU7UTQ4AJ4JW55 copy.gif" alt="Flying Gyroid 2">
-        <img class="flying-rocket flying-3" src="imgs/gyroid/443UXZZSZIVGUHAGTEFU7UTQ4AJ4JW55 copy.gif" alt="Flying Gyroid 3">
-        <img class="flying-ufo flying-4" src="imgs/gyroid/5FCQZMGVOPBLQVNTIGFKL6VLLQXOMXAT copy.gif" alt="Flying Gyroid 4">
-        <img class="flying-planet flying-5" src="imgs/gyroid/6QRD6BZLZZIRYHUSJ7FZJ62UHIOYYHXA copy.gif" alt="Flying Gyroid 5">
-        <img class="flying-meteor flying-6" src="imgs/gyroid/6Y5JUF2MAHHKYN22RJPOLTMVB4ZF3CAZ copy.gif" alt="Flying Gyroid 6">
-        <img class="flying-satellite flying-7" src="imgs/gyroid/DLTFU2TKORBCSRYEH4VUP2LTHD6D4S5A copy.gif" alt="Flying Gyroid 7">
-        <img class="flying-asteroid flying-8" src="imgs/gyroid/KR2ZRWG6OG7X7ZSRJXXR3YCD3K5S2SMR copy.gif" alt="Flying Gyroid 8">
-        <img class="flying-ship flying-9" src="imgs/gyroid/KR2ZRWG6OG7X7ZSRJXXR3YCD3K5S2SMR copy.gif" alt="Flying Gyroid 9">
-    </div>
+    header {
+        height: 170px;
+        padding: 15px 5px;
+        height: 119px;
+    }
     
-    <header>
-        <img class="title" src="imgs/TITLE.png" alt="Source Code Vintage">
-        <h2 class="subTitle">Join The Binary Swag Club</h2>
-        <img class="sword" src="imgs/sord-selected.png" alt="Sword Selected" id="sword1">
-        <img class="sword2" src="imgs/sword.png" alt="Sword" id="sword2">
-        
-         <nav>
-            <ul>
-                <li class="music-menu-item">
-                    <button id="musicMenuToggle" class="music-icon-btn">
-                        <span class="music-icon">♫</span>
-                    </button>
-                </li>
-                <li><a href="#home">home</a></li>
-                <li><a href="#products">for sale</a></li>
-                <li><a href="#about">about</a></li>
-                <li><a href="#contact">contact</a></li>
-                <li class="settings-menu-item">
-                    <button id="settingsMenuToggle" class="settings-icon-btn">
-                        <span class="settings-icon">⚙</span>
-                    </button>
-                </li>
-            </ul>
-            
-            <!-- SETTINGS MENU DROPDOWN -->
-            <div id="settingsMenu" class="settings-menu">
-                <div class="settings-menu-content">
-                    <h4>settings</h4>
-                    <div class="setting-item">
-                        <label>background animations: </label>
-                        <button id="animationToggle" class="setting-toggle-btn">
-                            <span class="toggle-text"> ON</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
-</header>
+    .subTitle {
+        font-size: 18px;
+        padding: 0 10px;
+        text-align: center;
+    }
+    
+    .sword, .sword2 {
+right: -67px;
+    height: 223px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        gap: 5px;
+        padding: 8px 0;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    nav ul li a {
+        font-size: 12px;
+        padding: 4px 6px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 100%;
+        padding: 10px 5px;
+        margin-top: 180px;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    section {
+        padding: 15px 5px;
+        margin-bottom: 30px;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    section h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    /* FORCE single column layout for product cards */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
+        margin: 25px 0 !important;
+        width: 100% !important;
+        justify-content: center !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: 95% !important;
+        max-width: 320px !important;
+        margin: 0 auto !important;
+        padding: 20px 15px !important;
+        text-align: center !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+        border: 1px solid #00ff00 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+    }
+    
+    .product-card h3, .product-card1 h3 {
+        font-size: 14px !important;
+        margin-bottom: 12px !important;
+        min-height: 3em !important;
+        line-height: 1.2 !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+    }
+    
+    .product-card h5, .product-card1 h5 {
+        font-size: 14px !important;
+        margin: 8px 0 !important;
+    }
+    
+    .product-card p, .product-card1 p {
+        font-size: 16px !important;
+        margin: 10px 0 !important;
+    }
+    
+    .product-card button, .product-card1 button {
+        width: 100% !important;
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+        margin-top: 12px !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 280px !important;
+        object-fit: contain !important;
+    }
+    
+    .BN {
+        width: 85% !important;
+        margin: 20px auto !important;
+    }
+    
+    /* Hide decorative elements on mobile */
+    .lighting, .bat, .alien, .us {
+        display: none;
+    }
+    
+    /* Hide flying elements for performance */
+    .flying-elements {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on mobile */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Mobile scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 20px 0 40px 0; /* Added bottom padding to prevent glow cutoff */
+        overflow-x: auto; /* Allow horizontal scrolling on mobile */
+        overflow-y: hidden;
+        --image-size: calc(100vw - 60px);
+        --image-gap: 15px;
+    }
+    
+    .scroll-img {
+        max-width: 250px; /* Reasonable maximum for very wide screens */
+        border: none;
+        transform-origin: center center; /* Ensure even expansion on hover */
+        box-shadow: 
+            0 0 5px rgba(35, 203, 49, 0.2),
+            0 0 10px rgba(35, 203, 49, 0.1),
+            0 5px 10px rgba(35, 203, 49, 0.15); /* Softer bottom shadow for mobile */
+    }
+    
+    .scrolling-images {
+        animation-duration: 20s; /* Faster animation on mobile */
+        padding: 0 15px;
+        overflow: visible; /* Prevent clipping of glow effects */
+    }
+    
+    /* Mobile popup adjustments */
+    .popup-content {
+        width: 95%;
+        margin: 10px;
+        padding: 20px 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .music-popup-content {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+        position: fixed;
+    }
+    
+    .music-background {
+        padding: 10px 0;
+        min-height: 100vh;
+    }
+    
+    .music-controls-overlay {
+        margin: 0 10px;
+        padding: 20px 15px;
+        width: calc(100% - 20px);
+    }
+    
+    .current-album-art {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .music-controls-overlay h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .song-list {
+        max-height: 200px;
+        gap: 6px;
+        padding: 0 5px;
+    }
+    
+    .song-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 10px;
+    }
+    
+    .album-cover {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .radio-display {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .music-controls {
+        gap: 15px;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 50px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        min-width: 280px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .settings-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    .glasses {
+        width: 60px;
+        margin: 15px;
+    }
+    
+    /* Ensure everything is visible except settings when closed */
+    * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .settings-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+}
 
-    <!-- SWORD POPUP -->
-    <div id="swordPopup" class="popup-overlay">
-        <div class="popup-content">
-            <button class="popup-close" id="closePopup">&times;</button>
-            <h3>何でもできる</h3>
-            <p>Everything is possible</p>
-            <p class="popup-quote">"You can do anything"</p>
-        </div>
-    </div>
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 191% !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        min-width: 250px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+    }
+    
+    .settings-menu.active {
+        transform: translate(-50%, -50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 12px !important;
+        padding: 4px 6px !important;
+    }
+    
+    /* Hide some decorative elements */
+    .lighting, .bat, .alien, .us {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on small tablets */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Medium tablet scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 25px 0 0 0;
+        --image-size: 200px;
+        --image-gap: 20px;
+    }
+    
+    .scroll-img {
+        border: none;
+    }
+    
+    .scrolling-images {
+        animation-duration: 28s;
+        padding: 0 16px;
+    }
+}
 
-    <!-- MUSIC POPUP -->
-    <div id="musicPopup" class="music-popup-overlay">
-        <div class="music-popup-content">
-            <button class="popup-close" id="closeMusicPopup">&times;</button>
-            <div class="music-background">
-                <img src="imgs/pngs-gifs/stars.gif" class="music-bg-image">
-                <div class="music-controls-overlay">
-                    <h3>♫ Music Player ♫</h3>
-                    <div class="current-album-display">
-                        <img id="currentAlbumCover" src="imgs/5074316349984588943.jpg" alt="Current Album Cover" class="current-album-art">
-                    </div>
-                    <div class="radio-display">
-                        <div class="radio-header">
-                            <span class="radio-station">BINARY TUNES</span>
-                            <span class="frequency">SRC.CD</span>
-                        </div>
-                        <div class="now-playing-info">
-                            <div class="genre-display">
-                                <span class="genre-label">GENRE:</span>
-                                <span id="currentGenre">Hip Hop</span>
-                            </div>
-                            <div class="song-display">
-                                <span class="song-label">NOW PLAYING:</span>
-                                <span id="currentSongTitle">Song 1</span>
-                            </div>
-                        </div>
-                        <div class="radio-ticker">
-                            <div class="ticker-content">
-                                <span id="radioDescription">This is Hip Hop radio - Song 1. All songs produced by The Prophitt.</span>
-                                <span id="radioDescriptionDupe">This is Hip Hop radio - Song 1. All songs produced by The Prophitt.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="song-list">
-                        <button class="song-btn active" data-song="cyber-dreams">
-                            <img src="imgs/pngs-gifs/everythingpossible.png" alt="Hip Hop Album" class="album-cover">
-                            <span class="song-title">Hip Hop</span>
-                        </button>
-                        <button class="song-btn" data-song="neon-nights">
-                            <img src="imgs/pngs-gifs/ikeaAlien.png" alt="Smooth Jazz Album" class="album-cover">
-                            <span class="song-title">Smooth Jazz</span>
-                        </button>
-                        <button class="song-btn" data-song="digital-rain">
-                            <img src="imgs/pngs-gifs/aeroglasses.gif" alt="Ambient Album" class="album-cover">
-                            <span class="song-title">Ambient</span>
-                        </button>
-                        <button class="song-btn" data-song="retro-wave">
-                            <img src="imgs/pngs-gifs/lighting.gif" alt="House Album" class="album-cover">
-                            <span class="song-title">House</span>
-                        </button>
-                        <button class="song-btn" data-song="synthwave">
-                            <img src="imgs/pngs-gifs/bat.gif" alt="Techno Album" class="album-cover">
-                            <span class="song-title">Techno</span>
-                        </button>
-                        <button class="song-btn" data-song="lo-fi-beats">
-                            <img src="imgs/pngs-gifs/hand.png" alt="Pop Album" class="album-cover">
-                            <span class="song-title">Pop</span>
-                        </button>
-                        <button class="song-btn" data-song="synthpop">
-                            <img src="imgs/pngs-gifs/lighting2.gif" alt="Dance Album" class="album-cover">
-                            <span class="song-title">Dance</span>
-                        </button>
-                        <button class="song-btn" data-song="chillwave">
-                            <img src="imgs/pngs-gifs/us.png" alt="Funk Album" class="album-cover">
-                            <span class="song-title">Funk</span>
-                        </button>
-                        <button class="song-btn" data-song="cyberpunk">
-                            <img src="imgs/pngs-gifs/fuckedGremlin.png" alt="Spooky Album" class="album-cover">
-                            <span class="song-title">Spooky</span>
-                        </button>
-                    </div>
-                    <div class="music-controls">
-                        <button id="playPauseBtn" class="control-btn">⏸</button>
-                        <button id="volumeBtn" class="control-btn">🔊</button>
-                        <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+/* Tablets */
+@media (min-width: 651px) and (max-width: 768px) {
+    .title {
+        max-width: 350px;
+        margin-top: 5px;
+    }
+    
+    header {
+        height: 160px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 15px;
+        height: 150px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        gap: 15px;
+        padding-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    main {
+        width: 92%;
+        margin-top: 170px;
+    }
+    
+    /* Three-column layout for tablets */
+    .product-container, .product-container1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(33.333% - 12px);
+        max-width: 220px;
+        min-width: 180px;
+        margin: 5px;
+    }
+    
+    .BN {
+        width: 60%;
+    }
+    
+    /* Tablet scrolling images adjustments */
+    .scrolling-container {
+        --image-size: 180px;
+        --image-gap: 22px;
+    }
+    
+    .scrolling-images {
+        animation-duration: 30s;
+        padding: 0 18px;
+    }
+    
+    /* Settings menu adjustments for tablets */
+    .settings-menu {
+        position: fixed !important;
+        top: 242% !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        min-width: 300px !important;
+        max-width: 80vw !important;
+        z-index: 9999 !important;
+    }
+    
+    .settings-menu.active {
+        transform: translate(-50%, -50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 16px !important;
+        padding: 6px 8px !important;
+    }
+    
+    /* Hide decorative elements on tablets */
+    .lighting, .bat, .alien, .us {
+        display: none;
+    }
+}
 
-<main>
-    <section id="home">
-        <!-- SCROLLING IMAGES CONTAINER -->
-        <div class="scrolling-container">
-            <div class="scrolling-images">
-                <img src="imgs/FELLAS/super.png" alt="Product 1" class="scroll-img">
-                <img src="imgs/FELLAS/super1.png" alt="Product 2" class="scroll-img">
-                <img src="imgs/FELLAS/super2.png" alt="Product 3" class="scroll-img">
-                <img src="imgs/FELLAS/super3.png" alt="Product 4" class="scroll-img">
-                <img src="imgs/FELLAS/super4.png" alt="Product 5" class="scroll-img">
-                <img src="imgs/FELLAS/super5.png" alt="Product 6" class="scroll-img">
-                <img src="imgs/FELLAS/super7.png" alt="Product 7" class="scroll-img">
-                <img src="imgs/FELLAS/super8.png" alt="Product 8" class="scroll-img">
-                <img src="imgs/FELLAS/super9.png" alt="Product 9" class="scroll-img">
-                <img src="imgs/FELLAS/super10.png" alt="Product 10" class="scroll-img">
-                <!-- Duplicate for seamless loop -->
-                <img src="imgs/FELLAS/super.png" alt="Product 1" class="scroll-img">
-                <img src="imgs/FELLAS/super1.png" alt="Product 2" class="scroll-img">
-                <img src="imgs/FELLAS/super2.png" alt="Product 3" class="scroll-img">
-                <img src="imgs/FELLAS/super3.png" alt="Product 4" class="scroll-img">
-                <img src="imgs/FELLAS/super4.png" alt="Product 5" class="scroll-img">
-                <img src="imgs/FELLAS/super5.png" alt="Product 6" class="scroll-img">
-                <img src="imgs/FELLAS/super7.png" alt="Product 7" class="scroll-img">
-                <img src="imgs/FELLAS/super8.png" alt="Product 8" class="scroll-img">
-                <img src="imgs/FELLAS/super9.png" alt="Product 9" class="scroll-img">
-                <img src="imgs/FELLAS/super10.png" alt="Product 10" class="scroll-img">
-            </div>
-        </div>
-    </section>
-    <section id="products" class="main-content">
-        <!-- SHIRTS -->
-        <h2 class="POP">TOPS</h2>
-        <div class="product-container">
-            <div class="product-card">
-                <h3>Weed Tee</h3>
-                <img src="imgs/shirts/Sold-Weed.png" class="P1" alt="Weed Tee">
-                <h5>size mens L</h5>
-                <p><strong>$50</strong></p>
-                <a href="#products">
-                    <button>Sold</button>
-                </a>
-            </div>
-            <div class="product-card">
-                <h3>super! tee</h3>
-                <img src="imgs/shirts/P01.jpg" class="P1" alt="Super Tee">
-                <h5>size womens S</h5>
-                <p><strong>$30</strong></p>
-                <a href="https://www.depop.com/products/podowski-super-cute-rare-anling-fushi/" target="_blank">
-                    <button>buy</button>
-                </a>
-            </div>
-            <div class="product-card">
-                <h3>tiger tee</h3>
-                <img src="imgs/shirts/P03.jpg" class="P1" alt="Tiger Tee">
-                <h5>size kids L</h5>
-                <p><strong>$35</strong></p>
-                <a href="https://www.depop.com/products/podowski-cool-vintage-the-mountain-tiger/" target="_blank">
-                    <button>buy</button>
-                </a>
-            </div>
-            <div class="product-card">
-                <h3>ostrich tee</h3>
-                <img src="imgs/shirts/P04.jpg" class="P1" alt="Ostrich Tee">
-                <h5>size mens M</h5>
-                <p><strong>$45</strong></p>
-                <a href="https://www.depop.com/products/podowski-super-cool-vintage-the-mountain/" target="_blank">
-                    <button>buy</button>
-                </a>
-            </div>
-            <div class="product-card">
-                <h3>wrestlemania tee</h3>
-                <img src="imgs/shirts/P05.jpg" class="P1" alt="Wrestlemania Tee">
-                <h5>size mens L</h5>
-                <p><strong>$40</strong></p>
-                <a href="https://www.depop.com/products/podowski-wrestlemania-iv-4-official-merch/" target="_blank">
-                    <button>buy</button>
-                </a>
-            </div>
-            <div class="product-card">
-                <h3>young frank tee</h3>
-                <img src="imgs/shirts/P06.jpg" class="P1" alt="Young Frank Tee">
-                <h5>size unisex M</h5>
-                <p><strong>$15</strong></p>
-                <a href="https://www.depop.com/products/podowski-fruit-of-the-loom-young/" target="_blank">
-                    <button>buy</button>
-                </a>
-            </div>
-            <div class="product-card">
-                <h3>benet/comfort colors tee</h3>
-                <img src="imgs/shirts/P07.jpg" class="P1" alt="Benet Tee">
-                <h5>size mens M</h5>
-                <p><strong>$30</strong></p>
-                <a href="https://www.depop.com/products/podowski-really-sick-benet-graphic-tee/" target="_blank">
-                    <button>buy</button>
-                </a>
-            </div>
-            
-        </div>
-        
-        <!-- COLLECTABLES -->
-        <h2 class="POP"id="collectables">TrINkEtS</h2>
-        <div class="product-container1">
-            <div class="product-card1">
-                <h3>Tiny (Devil's Rejects)</h3>
-                <img src="imgs/FELLAS/super8.png" class="P1" alt="Tiny Action Figure">
-                <h5>NECA Action Figure</h5>
-                <p><strong>$200</strong></p>
-                <a href="#contact">
-                    <button>Contact</button>
-                </a>
-            </div>
-            <div class="product-card1">
-                <h3>Dylan (Charlie's Angels)</h3>
-                <img src="imgs/FELLAS/super2.png" class="P1" alt="Dylan Doll">
-                <h5>JakksPacific Doll</h5>
-                <p><strong>$50</strong></p>
-                <a href="#collectables">
-                    <button>Sold</button>
-                </a>
-            </div>
-            <div class="product-card1">
-                <h3>Natalie (Charlie's Angels)</h3>
-                <img src="imgs/FELLAS/super3.png" class="P1" alt="Natalie Doll">
-                <h5>JakksPacific Doll</h5>
-                <p><strong>$45</strong></p>
-                <a href="#collectables">
-                    <button>Sold</button>
-                </a>
-            </div>
-            <div class="product-card1">
-                <h3>Mummy (Universal Monsters)</h3>
-                <img src="imgs/FELLAS/super4.png" class="P1" alt="Mummy Doll">
-                <h5>JakksPacific Doll</h5>
-                <p><strong>$60</strong></p>
-                <a href="#contact">
-                    <button>Contact</button>
-                </a>
-            </div>
-            <div class="product-card1">
-                <h3>Buffy the Vampire Slayer</h3>
-                <img src="imgs/FELLAS/super10.png" class="P1" alt="Comic Book">
-                <h5>Series 1e</h5>
-                <p><strong>$45</strong></p>
-                <a href="#collectables">
-                    <button>Sold</button>
-                </a>
-            </div>
-            <div class="product-card1">
-                <h3>Anakin to Darth Vader (Star Wars)</h3>
-                <img src="imgs/FELLAS/super.png" class="P1" alt="Gaming Controller">
-                <h5>Action Figure
-                </h5>
-                <p><strong>unavailable</strong></p>
-                <a href="#collectables">
-                    <button>NFS</button>
-                </a>
-            </div>
-            <div class="product-card1">
-                <h3>Superman</h3>
-                <img src="imgs/FELLAS/super1.png" class="P1" alt="Alien Figure">
-                <h5>Movie Masters Man of Steel Figurine</h5>
-                <p><strong>$20</strong></p>
-                <a href="#collectables">
-                    <button>Sold</button>
-                </a>
-            </div>
-            <div class="product-card1">
-                <h3>Captain Lucas Wolenczak</h3>
-                <img src="imgs/FELLAS/super7.png" class="P1" alt="Vintage Glasses">
-                <h5>PlayMates Figure (Sea Quest)</h5>
-                <p><strong>$20</strong></p>
-                <a href="#collectables">
-                    <button>Sold</button>
-                </a>
-            </div>
-            <div class="product-card1">
-                <h3>Captain Nathan Hale Bridger</h3>
-                <img src="imgs/FELLAS/super5.png" class="P1" alt="Vintage Glasses">
-                <h5>PlayMates Figure (Sea Quest)</h5>
-                <p><strong>$20</strong></p>
-                <a href="#collectables">
-                    <button>Sold</button>
-                </a>
-            </div>
-        </div>
-    </section>        
-    <section id="about">
-        <h2 class="POP">ABOUT US
-        </h2>
-        <video src="us.mp4" class="BN" autoplay loop muted type="video/mp4"></video>
+/* Large tablets and small desktops */
+@media (min-width: 769px) and (max-width: 1024px) {
+    main {
+        width: 90%;
+        margin-top: 170px;
+    }
+    
+    /* Four-column layout */
+    .product-container, .product-container1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(25% - 12px);
+        max-width: 200px;
+        min-width: 180px;
+        margin: 5px;
+    }
+    
+    .BN {
+        width: 50%;
+    }
+    
+    /* Settings menu adjustments for large tablets */
+    .settings-menu {
+        position: absolute !important;
+        top: 100% !important;
+        right: 0 !important;
+        left: auto !important;
+        transform: translateY(0) !important;
+        min-width: 220px !important;
+        max-width: none !important;
+        z-index: 1002 !important;
+    }
+    
+    .settings-menu.active {
+        transform: translateY(0) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 18px !important;
+        padding: 8px 10px !important;
+    }
+}
 
-        <img src="imgs/BNG.png" class="names">
-        <h6>Source Code Vintage is a small business created by Bugs and Prophitt. We are a couple who have recently relocated from Chicago to Rochester, NY. We at Source Code have spent our whole lives acquiring, curating, and creating one of kind pieces and can't wait to share them with like-minded individuals. We have unique items in many ranges of styles and pricing that you wont find anywhere else. Only some items available online. Find us in person at one of our events, inquire below! </h6>
-    </section>
-    <section id="contact">
-        <h2 class="POP">CONTACT</h2>
-        <p class="contactTXT"><a href="https://mail.google.com/mail/u/0/
-  ?to=sourcecodevintage@gmail.com
-  &tf=cm" target="_blank" >sourcecodevintage@gmail.com</a></p>
-        <p class="contactTXT"><a href="https://www.instagram.com/sourcecodevintage/" target="_blank" >@sourcecodevintage
-       </a></p>
-       <div class="contact-image-spacer">
-              <img src="imgs/sourcecodevintage copy.png">
-       </div>
-    </section>
-</main>
-<footer>
-        <img src="imgs/pngs-gifs/aeroglasses.gif" class="glasses">
-</footer>
+/* Desktop and larger */
+@media (min-width: 1025px) {
+    /* Original multi-column layout */
+    .product-container, .product-container1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin: 10px 0;
+    }
+    
+    .product-card, .product-card1 {
+        width: 200px;
+        margin: 10px;
+    }
+    
+    .BN {
+        width: 47%;
+    }
+    
+    /* Settings menu desktop styles */
+    .settings-menu {
+        position: absolute !important;
+        top: 100% !important;
+        right: 0 !important;
+        left: auto !important;
+        transform: translateY(0) !important;
+        min-width: 200px !important;
+        max-width: none !important;
+        z-index: 1002 !important;
+    }
+    
+    .settings-menu.active {
+        transform: translateY(0) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 18px !important;
+        padding: 8px 10px !important;
+    }
+}
 
-</body>
-</html>
+/* SWORD POPUP STYLES */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border: 2px solid rgb(35, 203, 49);
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(35, 203, 49, 0.5);
+    animation: popupSlideIn 0.3s ease-out;
+}
+
+@keyframes popupSlideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.popup-close {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    background: rgba(203, 35, 49, 0.2);
+    border: 2px solid rgb(203, 35, 49);
+    color: rgb(203, 35, 49);
+    font-size: 28px;
+    cursor: pointer;
+    font-family: Consolas, Courier, monospace;
+    transition: all 0.3s ease;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1005;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(203, 35, 49, 0.3);
+}
+
+.popup-close:hover {
+    background: rgba(203, 35, 49, 0.4);
+    border-color: rgb(255, 69, 69);
+    color: rgb(255, 69, 69);
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 
+        0 0 25px rgba(203, 35, 49, 0.6),
+        0 0 40px rgba(203, 35, 49, 0.3);
+    text-shadow: 0 0 15px rgba(255, 69, 69, 0.8);
+}
+
+.popup-content h3 {
+    color: rgb(35, 203, 49);
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-shadow: 0 0 15px rgba(35, 203, 49, 0.8);
+}
+
+.popup-content p {
+    color: rgb(35, 203, 49);
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+.popup-quote {
+    font-style: italic;
+    color: #aaa;
+    border-top: 1px solid rgba(35, 203, 49, 0.3);
+    padding-top: 15px;
+    margin-top: 20px;
+}
+
+/* FLYING ANIMATED ELEMENTS */
+.flying-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.flying-elements img {
+    position: absolute;
+    opacity: 0.8;
+}
+
+/* Flying animations */
+@keyframes flyAcross1 {
+    0% {
+        transform: translateX(-100px) translateY(20vh) rotate(0deg);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.8;
+    }
+    85% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(calc(100vw + 100px)) translateY(80vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes flyAcross2 {
+    0% {
+        transform: translateX(calc(100vw + 100px)) translateY(80vh) rotate(0deg);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.8;
+    }
+    85% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(-100px) translateY(30vh) rotate(-360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes flyAcross3 {
+    0% {
+        transform: translateX(-100px) translateY(60vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.7;
+    }
+    85% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(calc(100vw + 100px)) translateY(70vh) rotate(360deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+@keyframes flyAcross4 {
+    0% {
+        transform: translateX(calc(100vw + 100px)) translateY(25vh) rotate(0deg);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.9;
+    }
+    85% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(-100px) translateY(75vh) rotate(-360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes flyAcross5 {
+    0% {
+        transform: translateX(-100px) translateY(10vh) rotate(0deg) scale(0.7);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.7;
+    }
+    85% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(calc(100vw + 100px)) translateY(90vh) rotate(360deg) scale(0.7);
+        opacity: 0;
+    }
+}
+
+@keyframes flyAcross6 {
+    0% {
+        transform: translateX(calc(100vw + 100px)) translateY(50vh) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.8;
+    }
+    85% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(-100px) translateY(40vh) rotate(-360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+@keyframes flyAcross7 {
+    0% {
+        transform: translateX(-100px) translateY(35vh) rotate(0deg);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.9;
+    }
+    85% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(calc(100vw + 100px)) translateY(65vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes flyAcross8 {
+    0% {
+        transform: translateX(calc(100vw + 100px)) translateY(70vh) rotate(0deg) scale(0.6);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.7;
+    }
+    85% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(-100px) translateY(20vh) rotate(-360deg) scale(0.6);
+        opacity: 0;
+    }
+}
+
+@keyframes flyAcross9 {
+    0% {
+        transform: translateX(-100px) translateY(45vh) rotate(0deg) scale(0.9);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.8;
+    }
+    85% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(calc(100vw + 100px)) translateY(55vh) rotate(360deg) scale(0.9);
+        opacity: 0;
+    }
+}
+
+/* Apply animations with different timings */
+.flying-1 {
+    animation: flyAcross1 8s ease-in-out infinite;
+    animation-delay: 0s;
+}
+
+.flying-2 {
+    animation: flyAcross2 6s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+.flying-3 {
+    animation: flyAcross3 10s ease-in-out infinite;
+    animation-delay: 4s;
+}
+
+.flying-4 {
+    animation: flyAcross4 7s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.flying-5 {
+    animation: flyAcross5 12s ease-in-out infinite;
+    animation-delay: 6s;
+}
+
+.flying-6 {
+    animation: flyAcross6 9s ease-in-out infinite;
+    animation-delay: 8s;
+}
+
+.flying-7 {
+    animation: flyAcross7 11s ease-in-out infinite;
+    animation-delay: 3s;
+}
+
+.flying-8 {
+    animation: flyAcross8 8.5s ease-in-out infinite;
+    animation-delay: 5s;
+}
+
+.flying-9 {
+    animation: flyAcross9 13s ease-in-out infinite;
+    animation-delay: 7s;
+}
+
+/* Make sword images clickable */
+.sword, .sword2 {
+    cursor: pointer;
+}
+
+/* SETTINGS MENU */
+.settings-menu-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.settings-icon-btn {
+    background: none;
+    border: none;
+    color: rgb(35, 203, 49);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px #411;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.settings-icon-btn:hover {
+    transform: rotate(360deg);
+}
+
+.settings-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid rgb(35, 203, 49);
+    border-radius: 8px;
+    padding: 15px;
+    min-width: 200px;
+    box-shadow: 0 0 20px rgba(35, 203, 49, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1002;
+}
+
+.settings-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.settings-menu-content h4 {
+    color: rgb(35, 203, 49);
+    font-family: Consolas, Courier, monospace;
+    font-size: 16px;
+    margin: 0 0 15px 0;
+    text-align: center;
+    text-shadow: 0 0 10px #411;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.setting-item label {
+    color: rgb(35, 203, 49);
+    font-family: Consolas, Courier, monospace;
+    font-size: 12px;
+    text-shadow: 0 0 10px #411;
+}
+
+.setting-toggle-btn {
+    background: rgba(35, 203, 49, 0.2);
+    border: 1px solid rgb(35, 203, 49);
+    color: rgb(35, 203, 49);
+    padding: 4px 12px;
+    font-family: Consolas, Courier, monospace;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 3px;
+    text-shadow: 0 0 8px #411;
+    transition: all 0.3s ease;
+    min-width: 40px;
+}
+
+.setting-toggle-btn:hover {
+    background: rgba(35, 203, 49, 0.4);
+    transform: scale(1.05);
+}
+
+.setting-toggle-btn.disabled {
+    background: rgba(203, 35, 49, 0.2);
+    border-color: rgb(203, 35, 49);
+    color: rgb(203, 35, 49);
+}
+
+.setting-toggle-btn.disabled:hover {
+    background: rgba(203, 35, 49, 0.4);
+}
+
+.BN {
+    width: 45%;
+    margin: 20px 0;
+    position: relative;
+    z-index: 0;
+}
+
+/* MUSIC ICON STYLES */
+.music-menu-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.music-icon-btn {
+    background: none;
+    border: none;
+    color: rgb(35, 203, 49);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px #411;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.music-icon-btn:hover {
+    transform: scale(1.2);
+    text-shadow: 0 0 15px rgb(35, 203, 49);
+}
+
+/* MUSIC POPUP STYLES */
+.music-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1001;
+    backdrop-filter: blur(8px);
+}
+
+.music-popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    max-width: 750px;
+    max-height: 90vh;
+    min-height: auto;
+    border: 3px solid rgb(35, 203, 49);
+    border-radius: 25px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 
+        0 0 40px rgba(35, 203, 49, 0.6),
+        0 0 80px rgba(35, 203, 49, 0.3),
+        inset 0 0 20px rgba(35, 203, 49, 0.1);
+    animation: musicPopupSlideIn 0.4s ease-out;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
+    scrollbar-width: thin;
+    scrollbar-color: rgba(35, 203, 49, 0.5) rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+/* Custom scrollbar for webkit browsers */
+.music-popup-content::-webkit-scrollbar {
+    width: 12px;
+}
+
+.music-popup-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    margin: 10px;
+}
+
+.music-popup-content::-webkit-scrollbar-thumb {
+    background: rgba(35, 203, 49, 0.5);
+    border-radius: 6px;
+    border: 2px solid rgba(35, 203, 49, 0.3);
+}
+
+.music-popup-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(35, 203, 49, 0.7);
+}
+
+@keyframes musicPopupSlideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.music-background {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-image: url("../imgs/bgbg.png");
+    padding: 20px 0;
+}
+
+.music-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.music-controls-overlay {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.85), rgba(15, 15, 15, 0.85));
+    border: 2px solid rgba(35, 203, 49, 0.3);
+    border-radius: 20px;
+    margin: 0 20px;
+    backdrop-filter: blur(8px);
+    box-shadow: 
+        0 0 30px rgba(35, 203, 49, 0.2),
+        inset 0 0 30px rgba(35, 203, 49, 0.05);
+    width: calc(100% - 40px);
+    max-width: 700px;
+    overflow-x: hidden;
+}
+
+.music-controls-overlay::-webkit-scrollbar {
+    width: 8px;
+}
+
+.music-controls-overlay::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.music-controls-overlay::-webkit-scrollbar-thumb {
+    background: rgba(35, 203, 49, 0.5);
+    border-radius: 4px;
+    border: 1px solid rgba(35, 203, 49, 0.3);
+}
+
+.music-controls-overlay::-webkit-scrollbar-thumb:hover {
+    background: rgba(35, 203, 49, 0.7);
+}
+
+.current-album-display {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.current-album-art {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid rgba(35, 203, 49, 0.6);
+    box-shadow: 
+        0 0 30px rgba(35, 203, 49, 0.4),
+        0 0 60px rgba(35, 203, 49, 0.2),
+        inset 0 0 20px rgba(35, 203, 49, 0.1);
+    transition: all 0.3s ease;
+    animation: albumPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes albumPulse {
+    from { 
+        box-shadow: 
+            0 0 30px rgba(35, 203, 49, 0.4),
+            0 0 60px rgba(35, 203, 49, 0.2),
+            inset 0 0 20px rgba(35, 203, 49, 0.1);
+        transform: scale(1);
+    }
+    to { 
+        box-shadow: 
+            0 0 40px rgba(35, 203, 49, 0.6),
+            0 0 80px rgba(35, 203, 49, 0.3),
+            inset 0 0 30px rgba(35, 203, 49, 0.15);
+        transform: scale(1.02);
+    }
+}
+
+.music-controls-overlay h3 {
+    color: rgb(35, 203, 49);
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-shadow: 
+        0 0 20px rgba(35, 203, 49, 0.8),
+        0 0 40px rgba(35, 203, 49, 0.4);
+    animation: musicTitlePulse 2s ease-in-out infinite alternate;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+@keyframes musicTitlePulse {
+    from { text-shadow: 0 0 20px rgba(35, 203, 49, 0.8); }
+    to { text-shadow: 0 0 30px rgba(35, 203, 49, 1), 0 0 40px rgba(35, 203, 49, 0.5); }
+}
+
+.radio-display {
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 35px;
+    box-shadow: 
+        0 0 25px rgba(35, 203, 49, 0.3),
+        inset 0 0 20px rgba(35, 203, 49, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.radio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(35, 203, 49, 0.3);
+}
+
+.radio-station {
+    color: rgb(35, 203, 49);
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(35, 203, 49, 0.6);
+}
+
+.frequency {
+    color: rgba(35, 203, 49, 0.8);
+    font-size: 15px;
+    font-family: 'Courier New', monospace;
+    background: rgba(35, 203, 49, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(35, 203, 49, 0.3);
+}
+
+.now-playing-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.genre-display, .song-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.genre-label, .song-label {
+    color: rgba(35, 203, 49, 0.7);
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    min-width: 85px;
+    text-align: left;
+}
+
+#currentGenre {
+    color: rgb(35, 203, 49);
+    font-size: 19px;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(35, 203, 49, 0.8);
+    animation: genrePulse 2s ease-in-out infinite alternate;
+}
+
+#currentSongTitle {
+    color: rgb(35, 203, 49);
+    font-size: 17px;
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(35, 203, 49, 0.6);
+}
+
+@keyframes genrePulse {
+    from { 
+        text-shadow: 0 0 15px rgba(35, 203, 49, 0.8);
+        transform: scale(1);
+    }
+    to { 
+        text-shadow: 0 0 25px rgba(35, 203, 49, 1);
+        transform: scale(1.02);
+    }
+}
+
+.radio-ticker {
+    height: 20px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(35, 203, 49, 0.2);
+    position: relative;
+}
+
+.ticker-content {
+    position: absolute;
+    white-space: nowrap;
+    animation: tickerScroll 10s linear infinite;
+    color: rgba(35, 203, 49, 0.8);
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    gap: 50px;
+}
+
+#radioDescription, #radioDescriptionDupe {
+    flex-shrink: 0;
+}
+
+@keyframes tickerScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.now-playing::before {
+    content: "Now Playing: ";
+    color: #aaa;
+}
+
+.song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 25px;
+    padding: 0 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(35, 203, 49, 0.5) rgba(0, 0, 0, 0.3);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.song-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.song-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.song-list::-webkit-scrollbar-thumb {
+    background: rgba(35, 203, 49, 0.5);
+    border-radius: 4px;
+    border: 1px solid rgba(35, 203, 49, 0.3);
+}
+
+.song-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(35, 203, 49, 0.7);
+}
+
+.song-btn {
+    background: linear-gradient(135deg, rgba(35, 203, 49, 0.1), rgba(35, 203, 49, 0.05));
+    border: 2px solid rgba(35, 203, 49, 0.3);
+    color: rgb(35, 203, 49);
+    padding: 12px 20px;
+    font-family: Consolas, Courier, monospace;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 12px;
+    text-shadow: 0 0 10px rgba(35, 203, 49, 0.5);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.song-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(35, 203, 49, 0.2), transparent);
+    transition: left 0.3s ease;
+}
+
+.album-cover {
+    width: 35px;
+    height: 35px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid rgba(35, 203, 49, 0.4);
+    box-shadow: 0 0 10px rgba(35, 203, 49, 0.3);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.song-title {
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.song-btn:hover {
+    background: linear-gradient(135deg, rgba(35, 203, 49, 0.3), rgba(35, 203, 49, 0.2));
+    border-color: rgba(35, 203, 49, 0.6);
+    transform: translateX(15px) scale(1.02);
+    box-shadow: 
+        0 0 25px rgba(35, 203, 49, 0.4),
+        0 5px 15px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 15px rgba(35, 203, 49, 0.8);
+}
+
+.song-btn:hover::before {
+    left: 0;
+}
+
+.song-btn:hover .album-cover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(35, 203, 49, 0.6);
+    border-color: rgba(35, 203, 49, 0.8);
+}
+
+.song-btn.active {
+    background: linear-gradient(135deg, rgba(35, 203, 49, 0.4), rgba(35, 203, 49, 0.3));
+    border-color: rgb(35, 203, 49);
+    box-shadow: 
+        0 0 30px rgba(35, 203, 49, 0.6),
+        0 0 60px rgba(35, 203, 49, 0.3),
+        inset 0 0 20px rgba(35, 203, 49, 0.1);
+    font-weight: bold;
+    text-shadow: 0 0 20px rgba(35, 203, 49, 1);
+    transform: scale(1);
+}
+
+.song-btn.active .album-cover {
+    box-shadow: 
+        0 0 25px rgba(35, 203, 49, 0.8),
+        0 0 40px rgba(35, 203, 49, 0.4);
+    border-color: rgb(35, 203, 49);
+    transform: scale(1);
+}
+
+.music-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+    padding-top: 20px;
+}
+
+.control-btn {
+    background: rgba(35, 203, 49, 0.2);
+    border: 1px solid rgb(35, 203, 49);
+    color: rgb(35, 203, 49);
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background: rgba(35, 203, 49, 0.4);
+    transform: scale(1.1);
+}
+
+.volume-slider {
+    width: 120px;
+    height: 4px;
+    background: rgba(35, 203, 49, 0.3);
+    outline: none;
+    border-radius: 2px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: rgb(35, 203, 49);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(35, 203, 49, 0.5);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: rgb(35, 203, 49);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 10px rgba(35, 203, 49, 0.5);
+}
+
+/* Contact section spacing */
+.contact-image-spacer {
+    margin-top: 30px;
+}
+
+/* VERTICAL SCROLLING TEXT */
+.vertical-scroll-text {
+    position: fixed;
+    left: 10px;
+    top: 0;
+    height: 100vh;
+    width: 30px;
+    overflow: hidden;
+    z-index: 999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.vertical-scroll-content {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    color: rgb(35, 203, 49);
+    font-family: Consolas, Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(35, 203, 49, 0.6);
+    white-space: nowrap;
+    animation: verticalScroll 40s linear infinite;
+    letter-spacing: 3px;
+}
+
+/* VERTICAL SCROLLING TEXT RIGHT */
+.vertical-scroll-text-right {
+    position: fixed;
+    right: 10px;
+    top: 0;
+    height: 100vh;
+    width: 30px;
+    overflow: hidden;
+    z-index: 999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.vertical-scroll-content-right {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    color: rgb(35, 203, 49);
+    font-family: Consolas, Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(35, 203, 49, 0.6);
+    white-space: nowrap;
+    animation: verticalScrollReverse 40s linear infinite;
+    letter-spacing: 3px;
+}
+
+@keyframes verticalScroll {
+    0% {
+        transform: translateY(100vh);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+@keyframes verticalScrollReverse {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(50%);
+    }
+}
+
+/* CONTACT LINKS STYLING */
+#contact p a {
+    color: rgb(35, 203, 49);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(35, 203, 49, 0.6);
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(35, 203, 49, 0.1);
+    border: 1px solid rgba(35, 203, 49, 0.3);
+    margin: 5px 0;
+}
+
+#contact p a:hover {
+    transform: scale(1.1);
+    color: rgb(255, 255, 255);
+    background: rgba(35, 203, 49, 0.3);
+    border-color: rgb(35, 203, 49);
+    text-shadow: 
+        0 0 15px rgba(35, 203, 49, 1),
+        0 0 25px rgba(35, 203, 49, 0.8);
+    box-shadow: 
+        0 0 20px rgba(35, 203, 49, 0.4),
+        0 0 40px rgba(35, 203, 49, 0.2);
+}
+
+  
