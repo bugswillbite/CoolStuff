@@ -290,66 +290,66 @@ document.addEventListener("DOMContentLoaded", function () {
         const songs = {
             'cyber-dreams': {
                 name: 'Hip Hop',
-                songTitle: 'Cyber Dreams',
-                albumCover: 'imgs/pngs-gifs/everythingpossible.png',
+                songTitle: 'FLO NAZER',
+                albumCover: 'imgs/ALBUMS/SKATE.png',
                 url: 'music/hip-hop.mp4', // MP4 placeholder
-                description: 'This is Hip Hop radio - Cyber Dreams. All songs produced by The Prophitt.'
+                description: 'This is Hip Hop radio - FLO NAZER. All songs produced & composed by The Prophitt.'
             },
             'neon-nights': {
                 name: 'Smooth Jazz',
-                songTitle: 'Neon Nights',
-                albumCover: 'imgs/pngs-gifs/ikeaAlien.png',
+                songTitle: 'SECRETLY CANADIAN',
+                albumCover: 'imgs/ALBUMS/GUITAR.png',
                 url: 'music/smooth-jazz.mp4', // MP4 placeholder
-                description: 'This is Smooth Jazz radio - Neon Nights. All songs produced by The Prophitt.'
+                description: 'This is Smooth Jazz radio - SECRETLY CANADIAN. All songs produced & composed by The Prophitt.'
             },
             'digital-rain': {
                 name: 'Ambient',
-                songTitle: 'AMBIENTSONG',
-                albumCover: 'imgs/pngs-gifs/aeroglasses.gif',
+                songTitle: '3DSXLHACKS',
+                albumCover: 'imgs/ALBUMS/STARR.png',
                 url: 'music/ambient.mp4', // MP4 placeholder
-                description: 'This is Ambient radio - Digital Rain. All songs produced by The Prophitt.'
+                description: 'This is Ambient radio - 3DSXLHACKS. All songs produced & composed by The Prophitt.'
             },
             'retro-wave': {
                 name: 'House',
                 songTitle: 'REFRIDGERATOR RUNNIN',
-                albumCover: 'imgs/pngs-gifs/lighting.gif',
+                albumCover: 'imgs/ALBUMS/PARKOUR.png',
                 url: 'music/refridgerator_runnin_101 HOUSE.mp3',
-                description: 'This is House radio - Retro Wave. All songs produced by The Prophitt.'
+                description: 'House Track -+> REFRIDGERATOR RUNNIN. All songs produced & composed by The Prophitt. Better go catch it!'
             },
             'synthwave': {
                 name: 'Techno',
-                songTitle: 'Synthwave',
-                albumCover: 'imgs/pngs-gifs/bat.gif',
+                songTitle: 'REMOTE CONTROL THIEF',
+                albumCover: 'imgs/ALBUMS/UFO.png',
                 url: 'music/techno.mp4', // MP4 placeholder
-                description: 'This is Techno radio - Synthwave. All songs produced by The Prophitt.'
+                description: 'This is Techno radio - REMOTE CONTROL THIEF. All songs produced & composed by The Prophitt.'
             },
             'lo-fi-beats': {
                 name: 'Pop',
-                songTitle: 'Lo-Fi Beats',
-                albumCover: 'imgs/pngs-gifs/hand.png',
+                songTitle: 'CRINGE-WORTHY',
+                albumCover: 'imgs/ALBUMS/SUNNY.png',
                 url: 'music/pop.mp4', // MP4 placeholder
-                description: 'This is Pop radio - Lo-Fi Beats. All songs produced by The Prophitt.'
+                description: 'This is Pop radio - CRINGE-WORTHY. All songs produced & composed by The Prophitt.'
             },
             'synthpop': {
                 name: 'Dance',
-                songTitle: 'Synthpop',
-                albumCover: 'imgs/pngs-gifs/lighting2.gif',
+                songTitle: 'CLASSIC REGULAR',
+                albumCover: 'imgs/ALBUMS/JUMP.png',
                 url: 'music/dance.mp4', // MP4 placeholder
-                description: 'This is Dance radio - Synthpop. All songs produced by The Prophitt.'
+                description: 'This is Dance radio - CLASSIC REGULAR. All songs produced & composed by The Prophitt.'
             },
             'chillwave': {
                 name: 'Funk',
-                songTitle: 'Chillwave',
-                albumCover: 'imgs/pngs-gifs/us.png',
+                songTitle: 'IN A PINCH',
+                albumCover: 'imgs/ALBUMS/IDKK.png',
                 url: 'music/funk.mp4', // MP4 placeholder
-                description: 'This is Funk radio - Chillwave. All songs produced by The Prophitt.'
+                description: 'This is Funk radio - IN A PINCH. All songs produced & composed by The Prophitt.'
             },
             'cyberpunk': {
-                name: 'Spooky',
-                songTitle: 'Cyberpunk',
-                albumCover: 'imgs/pngs-gifs/fuckedGremlin.png',
-                url: 'music/spooky.mp4', // MP4 placeholder
-                description: 'This is Spooky radio - Cyberpunk. All songs produced by The Prophitt.'
+                name: 'Indie',
+                songTitle: 'COSMIC WAFFLE HOUSE',
+                albumCover: 'imgs/ALBUMS/ZOMBI.png',
+                url: 'music/Cosmic Waffle House_Indie_154.mp3', // MP4 placeholder
+                description: 'Indie Track -+> COSMIC WAFFLE HOUSE. All songs produced & composed by The Prophitt.'
             }
         };
 
@@ -748,6 +748,140 @@ document.addEventListener("DOMContentLoaded", function () {
         scrollContainer.setAttribute('tabindex', '0');
     }
 
+    // FLYING PROMO SETUP
+    function setupFlyingPromo() {
+        const flyingPromo = document.getElementById('flyingPromo');
+        
+        if (!flyingPromo) {
+            console.log('Flying promo element not found');
+            return;
+        }
+
+        let isPromoActive = false;
+        let isPromoClicked = false;
+        let isInteractiveMode = false;
+        let regularInterval;
+        let promoHideTimeout;
+        let enterFromLeft = false; // Track which side to enter from
+
+        // Show promo function
+        function showPromo() {
+            if (isPromoActive || isInteractiveMode) {
+                console.log('Promo already active or in interactive mode, skipping');
+                return;
+            }
+            
+            console.log(`Showing flying promo from ${enterFromLeft ? 'left' : 'right'} side`);
+            isPromoActive = true;
+            isPromoClicked = false;
+            
+            // Clear any existing classes
+            flyingPromo.classList.remove('clicked', 'interactive', 'from-left');
+            
+            // Add appropriate class for entrance direction
+            if (enterFromLeft) {
+                flyingPromo.classList.add('from-left');
+            }
+            
+            flyingPromo.classList.add('active');
+            
+            // Toggle entrance side for next time
+            enterFromLeft = !enterFromLeft;
+            
+            // Hide after 30 seconds (animation duration) unless clicked
+            promoHideTimeout = setTimeout(() => {
+                if (!isPromoClicked && !isInteractiveMode) {
+                    console.log('Hiding flying promo after 30 seconds');
+                    flyingPromo.classList.remove('active', 'from-left');
+                    setTimeout(() => {
+                        isPromoActive = false;
+                        console.log('Promo ready to show again');
+                    }, 2000); // Wait for transition to complete
+                }
+            }, 30000); // 30 seconds for the animation
+        }
+
+        // Set up regular interval (every 2 minutes)
+        regularInterval = setInterval(() => {
+            if (!isPromoActive && !isPromoClicked && !isInteractiveMode) {
+                console.log('2 minute interval triggered, showing promo');
+                showPromo();
+            } else {
+                console.log('2 minute interval triggered but promo already active or in interactive mode');
+            }
+        }, 120000); // 2 minutes
+
+        // Initialize first promo appearance after 10 seconds
+        setTimeout(() => {
+            console.log('Initial promo appearance');
+            showPromo();
+        }, 10000); // 10 seconds for initial appearance
+
+        // Handle promo click - enter interactive mode
+        flyingPromo.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Flying promo clicked! Entering interactive mode');
+            
+            if (isPromoActive && !isPromoClicked && !isInteractiveMode) {
+                isPromoClicked = true;
+                isInteractiveMode = true;
+                
+                // Clear the auto-hide timeout
+                if (promoHideTimeout) {
+                    clearTimeout(promoHideTimeout);
+                }
+                
+                // Remove bouncing animation and add interactive state
+                flyingPromo.classList.remove('active', 'from-left');
+                flyingPromo.classList.add('clicked');
+                
+                // After centering animation completes, enter interactive mode
+                setTimeout(() => {
+                    flyingPromo.classList.remove('clicked');
+                    flyingPromo.classList.add('interactive');
+                    console.log('Promo now in interactive mode');
+                }, 1000); // Wait for float animation to complete
+            }
+        });
+
+        // Handle clicking anywhere to dismiss interactive mode
+        document.addEventListener('click', (e) => {
+            if (isInteractiveMode && !flyingPromo.contains(e.target)) {
+                console.log('Clicked outside promo, dismissing interactive mode');
+                dismissInteractiveMode();
+            }
+        });
+
+        // Handle ESC key to dismiss interactive mode
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isInteractiveMode) {
+                console.log('ESC pressed, dismissing interactive mode');
+                dismissInteractiveMode();
+            }
+        });
+
+        function dismissInteractiveMode() {
+            isInteractiveMode = false;
+            isPromoClicked = false;
+            isPromoActive = false;
+            
+            flyingPromo.classList.remove('interactive');
+            
+            // Fade out
+            flyingPromo.style.transition = 'opacity 0.5s ease';
+            flyingPromo.style.opacity = '0';
+            
+            setTimeout(() => {
+                flyingPromo.style.transition = '';
+                flyingPromo.style.opacity = '';
+                console.log('Interactive mode dismissed');
+            }, 500);
+        }
+
+        console.log('Flying promo setup complete - will appear every 2 minutes');
+    }
+
     // INITIALIZE EVERYTHING
     addScrollAnimations();
     observeElements();
@@ -760,4 +894,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setupTouchGestures();
     setupScrollingImagesClick();
     setupDualScrolling();
+    setupFlyingPromo();
 });
+
+// Remove the duplicate function definition and calls at the bottom
