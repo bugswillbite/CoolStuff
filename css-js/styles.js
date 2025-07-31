@@ -339,10 +339,10 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             'chillwave': {
                 name: 'Funk',
-                songTitle: 'IN A PINCH',
+                songTitle: 'SHIVA, BABY',
                 albumCover: 'imgs/ALBUMS/IDKK.png',
                 url: 'music/shivababy_funk_100_2.mp3', // MP4 placeholder
-                description: 'This is Funk radio - IN A PINCH. All songs produced & composed by The Prophitt.'
+                description: 'This is Funk radio - SHIVA, BABY. All songs produced & composed by The Prophitt.'
             },
             'cyberpunk': {
                 name: 'Indie',
