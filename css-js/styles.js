@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 name: 'Funk',
                 songTitle: 'IN A PINCH',
                 albumCover: 'imgs/ALBUMS/IDKK.png',
-                url: 'music/funk.mp4', // MP4 placeholder
+                url: 'music/shivababy_funk_100_2.mp3', // MP4 placeholder
                 description: 'This is Funk radio - IN A PINCH. All songs produced & composed by The Prophitt.'
             },
             'cyberpunk': {
