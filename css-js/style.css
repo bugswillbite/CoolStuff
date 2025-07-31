@@ -303,12 +303,13 @@ section#home {
     z-index: 1;
 }
 
-.us {
-position: absolute;
-  bottom: -3850px;
-  left: 28px;
-  width: 30%;
-  z-index: 999;
+.us 
+{
+    position: absolute;
+    bottom: 0;
+    left: 247px;
+    width: 30%;
+    z-index: 9999 !important;
 }
 
 .BN {
@@ -449,7 +450,7 @@ footer {
     padding: 40px 20px;
     text-align: center;
     position: relative;
-    z-index: 2;
+    z-index: 9999;
     margin-left: -20px;
     width: 100vw;
     max-width: 100vw;
@@ -852,10 +853,10 @@ right: -67px;
         margin: 20px auto;
     }
     
-    /* Settings menu adjustments for mobile */
+    /* Settings menu adjustments for tablets */
     .settings-menu {
         position: fixed !important;
-        top: 191% !important;
+        top: 50% !important;
         left: 50% !important;
         right: auto !important;
         transform: translate(-50%, -50%) !important;
@@ -869,8 +870,8 @@ right: -67px;
     }
     
     .settings-icon-btn {
-        font-size: 12px !important;
-        padding: 4px 6px !important;
+        font-size: 14px !important;
+        padding: 6px 8px !important;
     }
     
     /* Hide some decorative elements */
@@ -902,6 +903,25 @@ right: -67px;
     .scrolling-images {
         animation-duration: 28s;
         padding: 0 16px;
+    }
+    
+    /* Flying promo adjustments for small tablets */
+    .flying-promo {
+        width: 350px;
+        height: 350px;
+        right: -450px;
+    }
+    
+    .promo-text {
+        font-size: 22px;
+        bottom: -50px;
+    }
+    
+    .promo-link::before {
+        top: -18px;
+        left: -18px;
+        right: -18px;
+        bottom: -18px;
     }
 }
 
@@ -1379,7 +1399,7 @@ right: -67px;
 }
 
 .flying-6 {
-    animation: flyAcross6 9s ease-in-out infinite;
+    animation: flyAcr   oss6 9s ease-in-out infinite;
     animation-delay: 8s;
 }
 
@@ -2081,7 +2101,7 @@ right: -67px;
 
 .vertical-scroll-content-right {
     writing-mode: vertical-lr;
-    text-orientation: mixed;
+    text-orientation: mefixed;
     color: rgb(35, 203, 49);
     font-family: Consolas, Courier, monospace;
     font-size: 14px;
@@ -2130,13 +2150,717 @@ right: -67px;
     transform: scale(1.1);
     color: rgb(255, 255, 255);
     background: rgba(35, 203, 49, 0.3);
-    border-color: rgb(35, 203, 49);
+    border-color: rgba(35, 97, 203, 0.239);
     text-shadow: 
-        0 0 15px rgba(35, 203, 49, 1),
-        0 0 25px rgba(35, 203, 49, 0.8);
+        0 0 15px rgb(35, 136, 203),
+        0 0 25px rgba(35, 133, 203, 0.8);
     box-shadow: 
         0 0 20px rgba(35, 203, 49, 0.4),
         0 0 40px rgba(35, 203, 49, 0.2);
 }
+/* FLYING PROMO IMAGE */
+.flying-promo {
+    position: fixed;
+    top: 50%;
+    right: -600px; /* Increased for larger size */
+    transform: translateY(-50%);
+    z-index: 1000;
+    opacity: 0;
+    transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+    width: 500px; /* Increased from 400px */
+    height: 500px; /* Increased from 400px */
+}
 
-  
+.flying-promo.active {
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    opacity: 1;
+    pointer-events: auto;
+    animation: promoEntranceAndBounce 30s ease-in-out forwards; /* Increased from 12s to 30s */
+}
+
+.flying-promo.clicked {
+    animation: floatToCenter 3s ease-out forwards;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+}
+
+/* Float to center animation when clicked */
+@keyframes floatToCenter {
+    0% {
+        transform: translate(50%, -50%) scale(1);
+    }
+    100% {
+        right: 50%;
+        top: 50%;
+        transform: translate(50%, -50%) scale(1.1);
+    }
+}
+
+/* Slower entrance, bouncing, and exit animation */
+@keyframes promoEntranceAndBounce {
+    /* Entrance (0-2 seconds) */
+    0% {
+        right: -600px;
+        top: 50%;
+        opacity: 0;
+        transform: translateY(-50%) scale(0.8);
+    }
+    6.67% { /* 2 second mark */
+        right: 50%;
+        top: 50%;
+        opacity: 1;
+        transform: translate(50%, -50%) scale(1);
+    }
+    
+    /* Bouncing phase (2-27 seconds) - much slower movement */
+    13.33% { /* 4 seconds */
+        right: 20%;
+        top: 20%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    20% { /* 6 seconds */
+        right: 80%;
+        top: 70%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    26.67% { /* 8 seconds */
+        right: 30%;
+        top: 80%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    33.33% { /* 10 seconds */
+        right: 70%;
+        top: 30%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    40% { /* 12 seconds */
+        right: 40%;
+        top: 60%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    46.67% { /* 14 seconds */
+        right: 90%;
+        top: 40%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    53.33% { /* 16 seconds */
+        right: 15%;
+        top: 75%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    60% { /* 18 seconds */
+        right: 60%;
+        top: 25%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    66.67% { /* 20 seconds */
+        right: 35%;
+        top: 65%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    73.33% { /* 22 seconds */
+        right: 75%;
+        top: 45%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    80% { /* 24 seconds */
+        right: 25%;
+        top: 55%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    86.67% { /* 26 seconds */
+        right: 65%;
+        top: 35%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    93.33% { /* 28 seconds */
+        right: 45%;
+        top: 70%;
+        transform: translate(50%, -50%) scale(1);
+    }
+    
+    /* Exit (28-30 seconds) */
+    100% {
+        left: -600px;
+        right: auto;
+        top: 70%;
+        opacity: 0;
+        transform: translateY(-50%) scale(0.8);
+    }
+}
+
+/* Remove blue shadows - use green instead */
+.flying-promo.active .promo-link {
+    animation: activePulseGreen 3s ease-in-out infinite;
+}
+
+@keyframes activePulseGreen {
+    0%, 100% {
+        box-shadow: 0 0 40px rgba(35, 57, 203, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 60px rgba(35, 105, 203, 0.6);
+    }
+}
+
+.promo-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: radial-gradient(circle, rgba(35, 155, 203, 0.47) 0%, rgba(35, 203, 49, 0.2) 50%, transparent 80%);
+    border-radius: 50%; /* Perfect circle */
+    padding: 0; /* Remove padding to let content fill the circle */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+}
+
+.promo-link::before {
+    content: '';
+    position: absolute;
+    top: -25px; /* Increased for larger size */
+    left: -25px;
+    right: -25px;
+    bottom: -25px;
+    background: radial-gradient(circle, rgba(35, 111, 203, 0.3) 0%, rgba(35, 203, 49, 0.1) 50%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.promo-link:hover::before {
+    opacity: 1;
+}
+
+.promo-link:hover {
+    background: radial-gradient(circle, rgba(35, 108, 203, 0.6) 0%, rgba(35, 111, 203, 0.3) 50%, rgba(35, 83, 203, 0.1) 80%);
+    box-shadow: 0 0 50px rgba(35, 97, 203, 0.7);
+    transform: scale(1.05);
+}
+
+.promo-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(1.1) contrast(1.2);
+    transition: all 0.5s ease;
+    animation: gentlePulse 3s ease-in-out infinite;
+    opacity: 0.75;
+}
+
+/* Style for the first image (gif background) */
+.promo-link img:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(1.1) contrast(1.2);
+    transition: all 0.5s ease;
+    animation: gentlePulse 3s ease-in-out infinite;
+    opacity: 0.75;
+       z-index: 1;
+}
+
+/* Style for the second image (overlay image) */
+.promo-link img:nth-child(2) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    filter: brightness(1.2) contrast(1.3);
+    transition: all 0.5s ease;
+    animation: gentlePulse 3s ease-in-out infinite;
+    z-index: 2;
+}
+
+.promo-link:hover .promo-image,
+.promo-link:hover img {
+    animation: hoverPulse 1.5s ease-in-out infinite;
+    filter: brightness(1.3) contrast(1.4) drop-shadow(0 0 25px rgb(35, 139, 203));
+}
+
+@keyframes gentlePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes hoverPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+.promo-text {
+    position: absolute;
+    bottom: -50px; /* Increased for larger size */
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(167, 35, 203);
+    font-family: 'VT323', monospace;
+    font-size: 28px; /* Increased from 24px */
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    background: linear-gradient(
+        90deg,
+        rgb(181, 35, 203) 0%,
+        rgb(255, 255, 255) 25%,
+        rgb(35, 161, 203) 50%,
+        rgb(255, 255, 255) 75%,
+        rgb(91, 35, 203) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(35, 127, 203, 0.6),
+        0 0 30px rgba(133, 35, 203, 0.4);
+    z-index: 3;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    50% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.promo-link:hover .promo-text {
+    animation: shimmerFast 1s ease-in-out infinite, textPulse 2s ease-in-out infinite;
+    transform: translateX(-50%) scale(1.1);
+    text-shadow: 
+        0 0 15px rgba(255, 255, 255, 1),
+        0 0 25px rgba(35, 46, 203, 0.8),
+        0 0 35px rgba(35, 139, 203, 0.6);
+}
+
+@keyframes shimmerFast {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes textPulse {
+    0%, 100% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.3);
+    }
+}
+
+/* Large tablets and small desktops */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .flying-promo {
+        width: 450px;
+        height: 450px;
+        right: -550px;
+    }
+    
+    .promo-text {
+        font-size: 26px;
+        bottom: -45px;
+    }
+    
+    .promo-link::before {
+        top: -22px;
+        left: -22px;
+        right: -22px;
+        bottom: -22px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 651px) and (max-width: 768px) {
+    .flying-promo {
+        width: 400px;
+        height: 400px;
+        right: -500px;
+    }
+    
+    .promo-text {
+        font-size: 24px;
+        bottom: -40px;
+    }
+    
+    .promo-link::before {
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+    }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Settings menu adjustments for tablets */
+    .settings-menu {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        min-width: 250px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+    }
+    
+    .settings-menu.active {
+        transform: translate(-50%, -50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    /* Hide some decorative elements */
+    .lighting, .bat, .alien, .us {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on small tablets */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Medium tablet scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 25px 0 0 0;
+        --image-size: 200px;
+        --image-gap: 20px;
+    }
+    
+    .scroll-img {
+        border: none;
+    }
+    
+    .scrolling-images {
+        animation-duration: 28s;
+        padding: 0 16px;
+    }
+    
+    /* Flying promo adjustments for small tablets */
+    .flying-promo {
+        width: 350px;
+        height: 350px;
+        right: -450px;
+    }
+    
+    .promo-text {
+        font-size: 22px;
+        bottom: -35px;
+    }
+    
+    .promo-link::before {
+        top: -18px;
+        left: -18px;
+        right: -18px;
+        bottom: -18px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 651px) and (max-width: 768px) {
+    .flying-promo {
+        width: 400px;
+        height: 400px;
+        right: -500px;
+    }
+    
+    .promo-text {
+        font-size: 24px;
+        bottom: -40px;
+    }
+    
+    .promo-link::before {
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+    }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Settings menu adjustments for tablets */
+    .settings-menu {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        min-width: 250px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+    }
+    
+    .settings-menu.active {
+        transform: translate(-50%, -50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    /* Hide some decorative elements */
+    .lighting, .bat, .alien, .us {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on small tablets */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Medium tablet scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 25px 0 0 0;
+        --image-size: 200px;
+        --image-gap: 20px;
+    }
+    
+    .scroll-img {
+        border: none;
+    }
+    
+    .scrolling-images {
+        animation-duration: 28s;
+        padding: 0 16px;
+    }
+    
+    /* Flying promo adjustments for small tablets */
+    .flying-promo {
+        width: 350px;
+        height: 350px;
+        right: -450px;
+    }
+    
+    .promo-text {
+        font-size: 22px;
+        bottom: -35px;
+    }
+    
+    .promo-link::before {
+        top: -18px;
+        left: -18px;
+        right: -18px;
+        bottom: -18px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 651px) and (max-width: 768px) {
+    .flying-promo {
+        width: 400px;
+        height: 400px;
+        right: -500px;
+    }
+    
+    .promo-text {
+        font-size: 24px;
+        bottom: -40px;
+    }
+    
+    .promo-link::before {
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+    }
+}
