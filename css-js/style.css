@@ -2625,7 +2625,6 @@ right: -67px;
         width: calc(100% - 20px);
     }
     
-       
     .current-album-art {
         width: 80px;
         height: 80px;
@@ -3927,7 +3926,7 @@ right: -67px;
 
 .vertical-scroll-content-right {
     writing-mode: vertical-lr;
-    text-orientation: mefixed;
+    text-orientation: mixed;
     color: rgb(35, 203, 49);
     font-family: Consolas, Courier, monospace;
     font-size: 14px;
