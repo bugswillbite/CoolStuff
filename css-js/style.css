@@ -5,6 +5,16 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Nabla';
+    src: url('../fonts/Nabla/Nabla-Regular-VariableFont_EDPT\,EHLT.woff2') format('woff2'),
+         url('../fonts/Nabla/Nabla-Regular-VariableFont_EDPT\,EHLT.woff') format('woff'),
+         url('../fonts/Nabla/Nabla-Regular-VariableFont_EDPT\,EHLT.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap; /* Ensures text is visible during font load */
+}
+
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -23,7 +33,7 @@ body {
 }
 .POP
 {
-  font-family: "Nabla", system-ui;
+  font-family: "Nabla", "Impact", "Arial Black", sans-serif; /* Added fallback fonts */
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -281,9 +291,71 @@ section#home {
 /* BACKGROUND IMAGES (Static) */
 .lighting {
     position: absolute;
-    top: 200px;
+    top: 278px;
     left: -60px;
     width: 30%;
+    z-index: 1;
+}
+.doom {
+position: absolute;
+top: 737px;
+  left: 45px;
+  width: 126px;
+  z-index: 1;
+}
+.alien1
+{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 80px;
+    z-index: 1;
+}
+.scatter1 {
+position: absolute;
+  top: 484px;
+  right: 1044px;
+  width: 80px;
+  z-index: 1;
+}
+
+.scatter2 {
+    position: absolute;
+    top: 800px;
+    left: 200px;
+    width: 60px;
+    z-index: 1;
+}
+
+.scatter3 {
+    position: absolute;
+    top: 600px;
+    right: 300px;
+    width: 90px;
+    z-index: 1;
+}
+
+.scatter4 {
+    position: absolute;
+    top: 950px;
+    left: 50px;
+    width: 70px;
+    z-index: 1;
+}
+
+.scatter5 {
+    position: absolute;
+    top: 500px;
+    left: 400px;
+    width: 85px;
+    z-index: 1;
+}
+
+.scatter6 {
+    position: absolute;
+    top: 750px;
+    right: 80px;
+    width: 75px;
     z-index: 1;
 }
 
@@ -622,7 +694,7 @@ right: -67px;
     }
     
     /* Hide decorative elements on mobile */
-    .lighting, .bat, .alien, .us {
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
         display: none;
     }
     
@@ -853,33 +925,17 @@ right: -67px;
         margin: 20px auto;
     }
     
-    /* Settings menu adjustments for tablets */
-    .settings-menu {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translate(-50%, -50%) !important;
-        min-width: 250px !important;
-        max-width: 90vw !important;
-        z-index: 9999 !important;
-    }
-    
-    .settings-menu.active {
-        transform: translate(-50%, -50%) !important;
-    }
-    
-    .settings-icon-btn {
-        font-size: 14px !important;
-        padding: 6px 8px !important;
-    }
-    
-    /* Hide some decorative elements */
-    .lighting, .bat, .alien, .us {
+    /* Hide decorative elements on mobile */
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
         display: none;
     }
     
-    /* Hide vertical scrolling text on small tablets */
+    /* Hide flying elements for performance */
+    .flying-elements {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on mobile */
     .vertical-scroll-text {
         display: none;
     }
@@ -888,40 +944,1765 @@ right: -67px;
         display: none;
     }
     
-    /* Medium tablet scrolling images adjustments */
+    /* Mobile scrolling images adjustments */
     .scrolling-container {
         margin: 200px 0 0 0;
-        padding: 25px 0 0 0;
-        --image-size: 200px;
-        --image-gap: 20px;
+        padding: 20px 0 40px 0; /* Added bottom padding to prevent glow cutoff */
+        overflow-x: auto; /* Allow horizontal scrolling on mobile */
+        overflow-y: hidden;
+        --image-size: calc(100vw - 60px);
+        --image-gap: 15px;
     }
     
     .scroll-img {
+        max-width: 250px; /* Reasonable maximum for very wide screens */
         border: none;
+        transform-origin: center center; /* Ensure even expansion on hover */
+        box-shadow: 
+            0 0 5px rgba(35, 203, 49, 0.2),
+            0 0 10px rgba(35, 203, 49, 0.1),
+            0 5px 10px rgba(35, 203, 49, 0.15); /* Softer bottom shadow for mobile */
     }
     
     .scrolling-images {
-        animation-duration: 28s;
-        padding: 0 16px;
+        animation-duration: 20s; /* Faster animation on mobile */
+        padding: 0 15px;
+        overflow: visible; /* Prevent clipping of glow effects */
     }
     
-    /* Flying promo adjustments for small tablets */
-    .flying-promo {
-        width: 350px;
-        height: 350px;
-        right: -450px;
+    /* Mobile popup adjustments */
+    .popup-content {
+        width: 95%;
+        margin: 10px;
+        padding: 20px 15px;
+        max-height: 80vh;
+        overflow-y: auto;
     }
     
-    .promo-text {
-        font-size: 22px;
-        bottom: -50px;
+    .music-popup-content {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+        position: fixed;
     }
     
-    .promo-link::before {
-        top: -18px;
-        left: -18px;
-        right: -18px;
-        bottom: -18px;
+    .music-background {
+        padding: 10px 0;
+        min-height: 100vh;
+    }
+    
+    .music-controls-overlay {
+        margin: 0 10px;
+        padding: 20px 15px;
+        width: calc(100% - 20px);
+    }
+    
+    .current-album-art {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .music-controls-overlay h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .song-list {
+        max-height: 200px;
+        gap: 6px;
+        padding: 0 5px;
+    }
+    
+    .song-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 10px;
+    }
+    
+    .album-cover {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .radio-display {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .music-controls {
+        gap: 15px;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 50px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        min-width: 280px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .settings-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    .glasses {
+        width: 60px;
+        margin: 15px;
+    }
+    
+    /* Ensure everything is visible except settings when closed */
+    * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .settings-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Hide decorative elements on mobile */
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
+        display: none;
+    }
+    
+    /* Hide flying elements for performance */
+    .flying-elements {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on mobile */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Mobile scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 20px 0 40px 0; /* Added bottom padding to prevent glow cutoff */
+        overflow-x: auto; /* Allow horizontal scrolling on mobile */
+        overflow-y: hidden;
+        --image-size: calc(100vw - 60px);
+        --image-gap: 15px;
+    }
+    
+    .scroll-img {
+        max-width: 250px; /* Reasonable maximum for very wide screens */
+        border: none;
+        transform-origin: center center; /* Ensure even expansion on hover */
+        box-shadow: 
+            0 0 5px rgba(35, 203, 49, 0.2),
+            0 0 10px rgba(35, 203, 49, 0.1),
+            0 5px 10px rgba(35, 203, 49, 0.15); /* Softer bottom shadow for mobile */
+    }
+    
+    .scrolling-images {
+        animation-duration: 20s; /* Faster animation on mobile */
+        padding: 0 15px;
+        overflow: visible; /* Prevent clipping of glow effects */
+    }
+    
+    /* Mobile popup adjustments */
+    .popup-content {
+        width: 95%;
+        margin: 10px;
+        padding: 20px 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .music-popup-content {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+        position: fixed;
+    }
+    
+    .music-background {
+        padding: 10px 0;
+        min-height: 100vh;
+    }
+    
+    .music-controls-overlay {
+        margin: 0 10px;
+        padding: 20px 15px;
+        width: calc(100% - 20px);
+    }
+    
+    .current-album-art {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .music-controls-overlay h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .song-list {
+        max-height: 200px;
+        gap: 6px;
+        padding: 0 5px;
+    }
+    
+    .song-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 10px;
+    }
+    
+    .album-cover {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .radio-display {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .music-controls {
+        gap: 15px;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 50px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        min-width: 280px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .settings-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    .glasses {
+        width: 60px;
+        margin: 15px;
+    }
+    
+    /* Ensure everything is visible except settings when closed */
+    * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .settings-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Hide decorative elements on mobile */
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
+        display: none;
+    }
+    
+    /* Hide flying elements for performance */
+    .flying-elements {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on mobile */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Mobile scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 20px 0 40px 0; /* Added bottom padding to prevent glow cutoff */
+        overflow-x: auto; /* Allow horizontal scrolling on mobile */
+        overflow-y: hidden;
+        --image-size: calc(100vw - 60px);
+        --image-gap: 15px;
+    }
+    
+    .scroll-img {
+        max-width: 250px; /* Reasonable maximum for very wide screens */
+        border: none;
+        transform-origin: center center; /* Ensure even expansion on hover */
+        box-shadow: 
+            0 0 5px rgba(35, 203, 49, 0.2),
+            0 0 10px rgba(35, 203, 49, 0.1),
+            0 5px 10px rgba(35, 203, 49, 0.15); /* Softer bottom shadow for mobile */
+    }
+    
+    .scrolling-images {
+        animation-duration: 20s; /* Faster animation on mobile */
+        padding: 0 15px;
+        overflow: visible; /* Prevent clipping of glow effects */
+    }
+    
+    /* Mobile popup adjustments */
+    .popup-content {
+        width: 95%;
+        margin: 10px;
+        padding: 20px 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .music-popup-content {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+        position: fixed;
+    }
+    
+    .music-background {
+        padding: 10px 0;
+        min-height: 100vh;
+    }
+    
+    .music-controls-overlay {
+        margin: 0 10px;
+        padding: 20px 15px;
+        width: calc(100% - 20px);
+    }
+    
+    .current-album-art {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .music-controls-overlay h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .song-list {
+        max-height: 200px;
+        gap: 6px;
+        padding: 0 5px;
+    }
+    
+    .song-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 10px;
+    }
+    
+    .album-cover {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .radio-display {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .music-controls {
+        gap: 15px;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 50px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        min-width: 280px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .settings-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    .glasses {
+        width: 60px;
+        margin: 15px;
+    }
+    
+    /* Ensure everything is visible except settings when closed */
+    * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .settings-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Hide decorative elements on mobile */
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
+        display: none;
+    }
+    
+    /* Hide flying elements for performance */
+    .flying-elements {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on mobile */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Mobile scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 20px 0 40px 0; /* Added bottom padding to prevent glow cutoff */
+        overflow-x: auto; /* Allow horizontal scrolling on mobile */
+        overflow-y: hidden;
+        --image-size: calc(100vw - 60px);
+        --image-gap: 15px;
+    }
+    
+    .scroll-img {
+        max-width: 250px; /* Reasonable maximum for very wide screens */
+        border: none;
+        transform-origin: center center; /* Ensure even expansion on hover */
+        box-shadow: 
+            0 0 5px rgba(35, 203, 49, 0.2),
+            0 0 10px rgba(35, 203, 49, 0.1),
+            0 5px 10px rgba(35, 203, 49, 0.15); /* Softer bottom shadow for mobile */
+    }
+    
+    .scrolling-images {
+        animation-duration: 20s; /* Faster animation on mobile */
+        padding: 0 15px;
+        overflow: visible; /* Prevent clipping of glow effects */
+    }
+    
+    /* Mobile popup adjustments */
+    .popup-content {
+        width: 95%;
+        margin: 10px;
+        padding: 20px 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .music-popup-content {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+        position: fixed;
+    }
+    
+    .music-background {
+        padding: 10px 0;
+        min-height: 100vh;
+    }
+    
+    .music-controls-overlay {
+        margin: 0 10px;
+        padding: 20px 15px;
+        width: calc(100% - 20px);
+    }
+    
+    .current-album-art {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .music-controls-overlay h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .song-list {
+        max-height: 200px;
+        gap: 6px;
+        padding: 0 5px;
+    }
+    
+    .song-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 10px;
+    }
+    
+    .album-cover {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .radio-display {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .music-controls {
+        gap: 15px;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 50px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        min-width: 280px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .settings-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    .glasses {
+        width: 60px;
+        margin: 15px;
+    }
+    
+    /* Ensure everything is visible except settings when closed */
+    * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .settings-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Hide decorative elements on mobile */
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
+        display: none;
+    }
+    
+    /* Hide flying elements for performance */
+    .flying-elements {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on mobile */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Mobile scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 20px 0 40px 0; /* Added bottom padding to prevent glow cutoff */
+        overflow-x: auto; /* Allow horizontal scrolling on mobile */
+        overflow-y: hidden;
+        --image-size: calc(100vw - 60px);
+        --image-gap: 15px;
+    }
+    
+    .scroll-img {
+        max-width: 250px; /* Reasonable maximum for very wide screens */
+        border: none;
+        transform-origin: center center; /* Ensure even expansion on hover */
+        box-shadow: 
+            0 0 5px rgba(35, 203, 49, 0.2),
+            0 0 10px rgba(35, 203, 49, 0.1),
+            0 5px 10px rgba(35, 203, 49, 0.15); /* Softer bottom shadow for mobile */
+    }
+    
+    .scrolling-images {
+        animation-duration: 20s; /* Faster animation on mobile */
+        padding: 0 15px;
+        overflow: visible; /* Prevent clipping of glow effects */
+    }
+    
+    /* Mobile popup adjustments */
+    .popup-content {
+        width: 95%;
+        margin: 10px;
+        padding: 20px 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .music-popup-content {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+        position: fixed;
+    }
+    
+    .music-background {
+        padding: 10px 0;
+        min-height: 100vh;
+    }
+    
+    .music-controls-overlay {
+        margin: 0 10px;
+        padding: 20px 15px;
+        width: calc(100% - 20px);
+    }
+    
+    .current-album-art {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .music-controls-overlay h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .song-list {
+        max-height: 200px;
+        gap: 6px;
+        padding: 0 5px;
+    }
+    
+    .song-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 10px;
+    }
+    
+    .album-cover {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .radio-display {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .music-controls {
+        gap: 15px;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 50px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        min-width: 280px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .settings-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    .glasses {
+        width: 60px;
+        margin: 15px;
+    }
+    
+    /* Ensure everything is visible except settings when closed */
+    * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .settings-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Hide decorative elements on mobile */
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
+        display: none;
+    }
+    
+    /* Hide flying elements for performance */
+    .flying-elements {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on mobile */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Mobile scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 20px 0 40px 0; /* Added bottom padding to prevent glow cutoff */
+        overflow-x: auto; /* Allow horizontal scrolling on mobile */
+        overflow-y: hidden;
+        --image-size: calc(100vw - 60px);
+        --image-gap: 15px;
+    }
+    
+    .scroll-img {
+        max-width: 250px; /* Reasonable maximum for very wide screens */
+        border: none;
+        transform-origin: center center; /* Ensure even expansion on hover */
+        box-shadow: 
+            0 0 5px rgba(35, 203, 49, 0.2),
+            0 0 10px rgba(35, 203, 49, 0.1),
+            0 5px 10px rgba(35, 203, 49, 0.15); /* Softer bottom shadow for mobile */
+    }
+    
+    .scrolling-images {
+        animation-duration: 20s; /* Faster animation on mobile */
+        padding: 0 15px;
+        overflow: visible; /* Prevent clipping of glow effects */
+    }
+    
+    /* Mobile popup adjustments */
+    .popup-content {
+        width: 95%;
+        margin: 10px;
+        padding: 20px 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .music-popup-content {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+        position: fixed;
+    }
+    
+    .music-background {
+        padding: 10px 0;
+        min-height: 100vh;
+    }
+    
+    .music-controls-overlay {
+        margin: 0 10px;
+        padding: 20px 15px;
+        width: calc(100% - 20px);
+    }
+    
+    .current-album-art {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .music-controls-overlay h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .song-list {
+        max-height: 200px;
+        gap: 6px;
+        padding: 0 5px;
+    }
+    
+    .song-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 10px;
+    }
+    
+    .album-cover {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .radio-display {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .music-controls {
+        gap: 15px;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 50px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        min-width: 280px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .settings-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    .glasses {
+        width: 60px;
+        margin: 15px;
+    }
+    
+    /* Ensure everything is visible except settings when closed */
+    * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .settings-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Hide decorative elements on mobile */
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
+        display: none;
+    }
+    
+    /* Hide flying elements for performance */
+    .flying-elements {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on mobile */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Mobile scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 20px 0 40px 0; /* Added bottom padding to prevent glow cutoff */
+        overflow-x: auto; /* Allow horizontal scrolling on mobile */
+        overflow-y: hidden;
+        --image-size: calc(100vw - 60px);
+        --image-gap: 15px;
+    }
+    
+    .scroll-img {
+        max-width: 250px; /* Reasonable maximum for very wide screens */
+        border: none;
+        transform-origin: center center; /* Ensure even expansion on hover */
+        box-shadow: 
+            0 0 5px rgba(35, 203, 49, 0.2),
+            0 0 10px rgba(35, 203, 49, 0.1),
+            0 5px 10px rgba(35, 203, 49, 0.15); /* Softer bottom shadow for mobile */
+    }
+    
+    .scrolling-images {
+        animation-duration: 20s; /* Faster animation on mobile */
+        padding: 0 15px;
+        overflow: visible; /* Prevent clipping of glow effects */
+    }
+    
+    /* Mobile popup adjustments */
+    .popup-content {
+        width: 95%;
+        margin: 10px;
+        padding: 20px 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .music-popup-content {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+        position: fixed;
+    }
+    
+    .music-background {
+        padding: 10px 0;
+        min-height: 100vh;
+    }
+    
+    .music-controls-overlay {
+        margin: 0 10px;
+        padding: 20px 15px;
+        width: calc(100% - 20px);
+    }
+    
+    .current-album-art {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .music-controls-overlay h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .song-list {
+        max-height: 200px;
+        gap: 6px;
+        padding: 0 5px;
+    }
+    
+    .song-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 10px;
+    }
+    
+    .album-cover {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .radio-display {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .music-controls {
+        gap: 15px;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 50px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        min-width: 280px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .settings-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    .glasses {
+        width: 60px;
+        margin: 15px;
+    }
+    
+    /* Ensure everything is visible except settings when closed */
+    * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .settings-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 451px) and (max-width: 650px) {
+    .title {
+        max-width: 320px;
+        margin-top: 8px;
+    }
+    
+    header {
+        height: 170px;
+        padding: 15px;
+    }
+    
+    .subTitle {
+        font-size: 20px;
+    }
+    
+    .sword, .sword2 {
+        right: 10px;
+        height: 140px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+        white-space: nowrap;
+    }
+    
+    main {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 180px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    /* Two-column layout for this size */
+    .product-container, .product-container1 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .product-card, .product-card1 {
+        width: calc(50% - 10px) !important;
+        max-width: 250px !important;
+        min-width: 200px !important;
+        margin: 5px !important;
+        padding: 18px 12px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+    
+    .P1 {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 200px !important;
+    }
+    
+    .BN {
+        width: 70%;
+        margin: 20px auto;
+    }
+    
+    /* Hide decorative elements on mobile */
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
+        display: none;
+    }
+    
+    /* Hide flying elements for performance */
+    .flying-elements {
+        display: none;
+    }
+    
+    /* Hide vertical scrolling text on mobile */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Mobile scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 20px 0 40px 0; /* Added bottom padding to prevent glow cutoff */
+        overflow-x: auto; /* Allow horizontal scrolling on mobile */
+        overflow-y: hidden;
+        --image-size: calc(100vw - 60px);
+        --image-gap: 15px;
+    }
+    
+    .scroll-img {
+        max-width: 250px; /* Reasonable maximum for very wide screens */
+        border: none;
+        transform-origin: center center; /* Ensure even expansion on hover */
+        box-shadow: 
+            0 0 5px rgba(35, 203, 49, 0.2),
+            0 0 10px rgba(35, 203, 49, 0.1),
+            0 5px 10px rgba(35, 203, 49, 0.15); /* Softer bottom shadow for mobile */
+    }
+    
+    .scrolling-images {
+        animation-duration: 20s; /* Faster animation on mobile */
+        padding: 0 15px;
+        overflow: visible; /* Prevent clipping of glow effects */
+    }
+    
+    /* Mobile popup adjustments */
+    .popup-content {
+        width: 95%;
+        margin: 10px;
+        padding: 20px 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .music-popup-content {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+        position: fixed;
+    }
+    
+    .music-background {
+        padding: 10px 0;
+        min-height: 100vh;
+    }
+    
+    .music-controls-overlay {
+        margin: 0 10px;
+        padding: 20px 15px;
+        width: calc(100% - 20px);
+    }
+    
+       
+    .current-album-art {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .music-controls-overlay h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .song-list {
+        max-height: 200px;
+        gap: 6px;
+        padding: 0 5px;
+    }
+    
+    .song-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 10px;
+    }
+    
+    .album-cover {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .radio-display {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .music-controls {
+        gap: 15px;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    /* Settings menu adjustments for mobile */
+    .settings-menu {
+        position: fixed !important;
+        top: 50px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        min-width: 280px !important;
+        max-width: 90vw !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .settings-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .settings-icon-btn {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+    
+    .glasses {
+        width: 60px;
+        margin: 15px;
+    }
+    
+    /* Ensure everything is visible except settings when closed */
+    * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    .settings-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
 }
 
@@ -1010,9 +2791,54 @@ right: -67px;
         padding: 6px 8px !important;
     }
     
-    /* Hide decorative elements on tablets */
-    .lighting, .bat, .alien, .us {
+    /* Hide some decorative elements */
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
         display: none;
+    }
+    
+    /* Hide vertical scrolling text on small tablets */
+    .vertical-scroll-text {
+        display: none;
+    }
+    
+    .vertical-scroll-text-right {
+        display: none;
+    }
+    
+    /* Medium tablet scrolling images adjustments */
+    .scrolling-container {
+        margin: 200px 0 0 0;
+        padding: 25px 0 0 0;
+        --image-size: 200px;
+        --image-gap: 20px;
+    }
+    
+    .scroll-img {
+        border: none;
+    }
+    
+    .scrolling-images {
+        animation-duration: 28s;
+        padding: 0 16px;
+    }
+    
+    /* Flying promo adjustments for small tablets */
+    .flying-promo {
+        width: 350px;
+        height: 350px;
+        right: -450px;
+    }
+    
+    .promo-text {
+        font-size: 22px;
+        bottom: -35px;
+    }
+    
+    .promo-link::before {
+        top: -18px;
+        left: -18px;
+        right: -18px;
+        bottom: -18px;
     }
 }
 
@@ -1399,7 +3225,7 @@ right: -67px;
 }
 
 .flying-6 {
-    animation: flyAcr   oss6 9s ease-in-out infinite;
+    animation: flyAcross6 9s ease-in-out infinite;
     animation-delay: 8s;
 }
 
@@ -2178,112 +4004,43 @@ right: -67px;
     transform: translate(50%, -50%);
     opacity: 1;
     pointer-events: auto;
-    animation: promoEntranceAndBounce 30s ease-in-out forwards; /* Increased from 12s to 30s */
+    animation: promoEntranceAndBounce 5s ease-in-out forwards; /* Changed from 30s to 5s */
 }
 
-.flying-promo.clicked {
-    animation: floatToCenter 3s ease-out forwards;
-    right: 50%;
-    top: 50%;
-    transform: translate(50%, -50%);
-}
-
-/* Float to center animation when clicked */
-@keyframes floatToCenter {
-    0% {
-        transform: translate(50%, -50%) scale(1);
-    }
-    100% {
-        right: 50%;
-        top: 50%;
-        transform: translate(50%, -50%) scale(1.1);
-    }
-}
-
-/* Slower entrance, bouncing, and exit animation */
+/* Faster entrance, bouncing, and exit animation */
 @keyframes promoEntranceAndBounce {
-    /* Entrance (0-2 seconds) */
+    /* Entrance (0-1 seconds) */
     0% {
         right: -600px;
         top: 50%;
         opacity: 0;
         transform: translateY(-50%) scale(0.8);
     }
-    6.67% { /* 2 second mark */
+    20% { /* 1 second mark */
         right: 50%;
         top: 50%;
         opacity: 1;
         transform: translate(50%, -50%) scale(1);
     }
     
-    /* Bouncing phase (2-27 seconds) - much slower movement */
-    13.33% { /* 4 seconds */
+    /* Brief bouncing phase (1-4 seconds) */
+    40% { /* 2 seconds */
         right: 20%;
-        top: 20%;
+        top: 30%;
         transform: translate(50%, -50%) scale(1);
     }
-    20% { /* 6 seconds */
+    60% { /* 3 seconds */
         right: 80%;
         top: 70%;
         transform: translate(50%, -50%) scale(1);
     }
-    26.67% { /* 8 seconds */
-        right: 30%;
-        top: 80%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    33.33% { /* 10 seconds */
-        right: 70%;
-        top: 30%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    40% { /* 12 seconds */
-        right: 40%;
-        top: 60%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    46.67% { /* 14 seconds */
-        right: 90%;
-        top: 40%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    53.33% { /* 16 seconds */
-        right: 15%;
-        top: 75%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    60% { /* 18 seconds */
-        right: 60%;
-        top: 25%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    66.67% { /* 20 seconds */
-        right: 35%;
-        top: 65%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    73.33% { /* 22 seconds */
-        right: 75%;
-        top: 45%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    80% { /* 24 seconds */
-        right: 25%;
-        top: 55%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    86.67% { /* 26 seconds */
-        right: 65%;
-        top: 35%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    93.33% { /* 28 seconds */
-        right: 45%;
-        top: 70%;
+    80% { /* 4 seconds */
+        right: 50%;
+        top: 50%;
         transform: translate(50%, -50%) scale(1);
     }
     
-    /* Exit (28-30 seconds) */
+    /* Exit (4-5 seconds) */
     100% {
         left: -600px;
         right: auto;
@@ -2625,7 +4382,7 @@ right: -67px;
     }
     
     /* Hide some decorative elements */
-    .lighting, .bat, .alien, .us {
+    .lighting, .bat, .alien, .us, .scatter1, .scatter2, .scatter3, .scatter4, .scatter5, .scatter6 {
         display: none;
     }
     
@@ -2672,195 +4429,5 @@ right: -67px;
         left: -18px;
         right: -18px;
         bottom: -18px;
-    }
-}
-
-/* Tablets */
-@media (min-width: 651px) and (max-width: 768px) {
-    .flying-promo {
-        width: 400px;
-        height: 400px;
-        right: -500px;
-    }
-    
-    .promo-text {
-        font-size: 24px;
-        bottom: -40px;
-    }
-    
-    .promo-link::before {
-        top: -20px;
-        left: -20px;
-        right: -20px;
-        bottom: -20px;
-    }
-}
-
-/* Small tablets and large phones */
-@media (min-width: 451px) and (max-width: 650px) {
-    .title {
-        max-width: 320px;
-        margin-top: 8px;
-    }
-    
-    header {
-        height: 170px;
-        padding: 15px;
-    }
-    
-    .subTitle {
-        font-size: 20px;
-    }
-    
-    .sword, .sword2 {
-        right: 10px;
-        height: 140px;
-    }
-    
-    nav ul {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: center;
-        padding: 10px 0;
-    }
-    
-    nav ul li a {
-        font-size: 14px;
-        padding: 5px 8px;
-        white-space: nowrap;
-    }
-    
-    main {
-        width: 95%;
-        padding: 15px 10px;
-        margin-top: 180px;
-    }
-    
-    section {
-        padding: 20px 15px;
-        margin-bottom: 25px;
-    }
-    
-    /* Two-column layout for this size */
-    .product-container, .product-container1 {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        gap: 15px !important;
-        margin: 20px 0 !important;
-    }
-    
-    .product-card, .product-card1 {
-        width: calc(50% - 10px) !important;
-        max-width: 250px !important;
-        min-width: 200px !important;
-        margin: 5px !important;
-        padding: 18px 12px !important;
-        text-align: center !important;
-        box-sizing: border-box !important;
-    }
-    
-    .P1 {
-        width: 100% !important;
-        height: auto !important;
-        max-width: 200px !important;
-    }
-    
-    .BN {
-        width: 70%;
-        margin: 20px auto;
-    }
-    
-    /* Settings menu adjustments for tablets */
-    .settings-menu {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translate(-50%, -50%) !important;
-        min-width: 250px !important;
-        max-width: 90vw !important;
-        z-index: 9999 !important;
-    }
-    
-    .settings-menu.active {
-        transform: translate(-50%, -50%) !important;
-    }
-    
-    .settings-icon-btn {
-        font-size: 14px !important;
-        padding: 6px 8px !important;
-    }
-    
-    /* Hide some decorative elements */
-    .lighting, .bat, .alien, .us {
-        display: none;
-    }
-    
-    /* Hide vertical scrolling text on small tablets */
-    .vertical-scroll-text {
-        display: none;
-    }
-    
-    .vertical-scroll-text-right {
-        display: none;
-    }
-    
-    /* Medium tablet scrolling images adjustments */
-    .scrolling-container {
-        margin: 200px 0 0 0;
-        padding: 25px 0 0 0;
-        --image-size: 200px;
-        --image-gap: 20px;
-    }
-    
-    .scroll-img {
-        border: none;
-    }
-    
-    .scrolling-images {
-        animation-duration: 28s;
-        padding: 0 16px;
-    }
-    
-    /* Flying promo adjustments for small tablets */
-    .flying-promo {
-        width: 350px;
-        height: 350px;
-        right: -450px;
-    }
-    
-    .promo-text {
-        font-size: 22px;
-        bottom: -35px;
-    }
-    
-    .promo-link::before {
-        top: -18px;
-        left: -18px;
-        right: -18px;
-        bottom: -18px;
-    }
-}
-
-/* Tablets */
-@media (min-width: 651px) and (max-width: 768px) {
-    .flying-promo {
-        width: 400px;
-        height: 400px;
-        right: -500px;
-    }
-    
-    .promo-text {
-        font-size: 24px;
-        bottom: -40px;
-    }
-    
-    .promo-link::before {
-        top: -20px;
-        left: -20px;
-        right: -20px;
-        bottom: -20px;
     }
 }
