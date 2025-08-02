@@ -684,7 +684,7 @@ document.addEventListener("DOMContentLoaded", function () {
         function handleInfiniteScroll() {
             const scrollLeft = scrollContainer.scrollLeft;
             const scrollWidth = scrollContainer.scrollWidth;
-            const clientWidth = scrollContainer.clientWidth;
+            const clientWidth = scrollContainer.clientWidth;a
             const maxScroll = scrollWidth - clientWidth;
             
             // Calculate the width of one complete set of images (including gaps)
@@ -912,4 +912,18 @@ document.addEventListener("DOMContentLoaded", function () {
     setupScrollingImagesClick();
     setupDualScrolling();
     setupFlyingPromo();
+});
+
+
+
+window.addEventListener('scroll', () => {
+    const image = document.querySelector('.tilt-img');
+    if (!image) return;
+
+    const rect = image.getBoundingClientRect();
+    const windowCenter = window.innerHeight / 2;
+    const offset = rect.top + rect.height / 2 - windowCenter;
+
+    const rotateY = Math.max(-15, Math.min(15, offset / 15)); // ← note: positive value
+    image.style.transform = `rotateY(${rotateY}deg)`;
 });
