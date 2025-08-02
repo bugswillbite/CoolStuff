@@ -6,7 +6,7 @@
 }
 
 @font-face {
-    font-family: 'Nabla';
+    font-family: 'Nabla1';
     src: url('../fonts/Nabla/Nabla-Regular-VariableFont_EDPT\,EHLT.woff2') format('woff2'),
          url('../fonts/Nabla/Nabla-Regular-VariableFont_EDPT\,EHLT.woff') format('woff'),
          url('../fonts/Nabla/Nabla-Regular-VariableFont_EDPT\,EHLT.ttf') format('truetype');
@@ -33,12 +33,10 @@ body {
 }
 .POP
 {
-  font-family: "Nabla", "Impact", "Arial Black", sans-serif; /* Added fallback fonts */
+  font-family: "Nabla", "Nabla1", "Impact", "Arial Black", sans-serif; /* Added fallback fonts */
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-
-
     font-size: 50px;
 }
 .subTitle
