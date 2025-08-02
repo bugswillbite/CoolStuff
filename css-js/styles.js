@@ -913,5 +913,3 @@ document.addEventListener("DOMContentLoaded", function () {
     setupDualScrolling();
     setupFlyingPromo();
 });
-
-// Remove the duplicate function definition and calls at the bottom
