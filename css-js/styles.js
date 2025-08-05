@@ -684,7 +684,7 @@ document.addEventListener("DOMContentLoaded", function () {
         function handleInfiniteScroll() {
             const scrollLeft = scrollContainer.scrollLeft;
             const scrollWidth = scrollContainer.scrollWidth;
-            const clientWidth = scrollContainer.clientWidth;a
+            const clientWidth = scrollContainer.clientWidth;
             const maxScroll = scrollWidth - clientWidth;
             
             // Calculate the width of one complete set of images (including gaps)
