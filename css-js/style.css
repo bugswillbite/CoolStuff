@@ -1,17 +1,15 @@
-/* RESET & GENERAL */
 * 
 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 @font-face 
 {
-    font-family: 'Nabla1';
-    src: url('../fonts/Nabla/Nabla-Regular-VariableFont_EDPT\,EHLT.woff2') format('woff2'),
-         url('../fonts/Nabla/Nabla-Regular-VariableFont_EDPT\,EHLT.woff') format('woff'),
-         url('../fonts/Nabla/Nabla-Regular-VariableFont_EDPT\,EHLT.ttf') format('truetype');
+    font-family: 'Nabla.Download';
+    src: url('../fonts/Nabla/Nabla.woff2') format('woff2'),
+         url('../fonts/Nabla/Nabla.woff') format('woff'),
+         url('../fonts/Nabla/Nabla.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -37,7 +35,7 @@ body
 }
 .POP
 {
-  font-family: "Nabla", "Nabla1", "Impact", "Arial Black", sans-serif; 
+  font-family: "Nabla", "Nabla.Download", "Impact", "Arial Black", sans-serif; 
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -55,6 +53,13 @@ body
     position: relative;
     max-width: 420px;
 }
+.quote
+{
+    max-width: 533px;
+    text-align: center;
+    font-weight: lighter;
+    text-transform: none;
+}
 h6
 {
     max-width: 800px;
@@ -68,10 +73,10 @@ h1, h2, h3, h4, h5, h6
 {
     margin: 0;
     padding: 0;
-  font-family: "JetBrains Mono", monospace;
-  font-optical-sizing: auto;
-  font-style: normal;
-  text-transform: capitalize;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    text-transform: capitalize;
 }
 h6
 {
@@ -83,6 +88,7 @@ h6
     color: #00ff00;
     text-decoration: none;
 }
+
 /* SCROLL ANIMATION CLASSES */
 .fade-in 
 {
@@ -134,6 +140,59 @@ h6
     opacity: 1;
     transform: scale(1);
 }
+/* === Spinning Flip Image Card (clean version) === */
+#spinning-image-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+margin: 10px 0px 0px 0px;
+}
+
+.card-container {
+  perspective: 1000px;
+}
+
+.card {
+  width: 240px;
+  height: 420px;
+  position: relative;
+  transition: transform 0.75s;
+  transform-style: preserve-3d;
+}
+
+.card-container:hover .card {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1em;
+  overflow: hidden;
+}
+
+.card-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  outline: none;
+  display: block;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
 
 /* FIXED HEADER */
 header {
@@ -2055,68 +2114,28 @@ right: -67px;
 .flying-promo {
     position: fixed;
     top: 50%;
-    right: -600px; /* Increased for larger size */
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1000;
     opacity: 0;
-    transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: opacity 0.8s ease-in-out;
     pointer-events: none;
-    width: 500px; /* Increased from 400px */
-    height: 500px; /* Increased from 400px */
+    width: 500px;
+    height: 500px;
 }
 
 .flying-promo.active {
-    right: 50%;
-    top: 50%;
-    transform: translate(50%, -50%);
     opacity: 1;
     pointer-events: auto;
-    animation: promoEntranceAndBounce 5s ease-in-out forwards; /* Changed from 30s to 5s */
+    /* Remove the complex animation and positioning changes */
 }
 
+/* Remove the complex bouncing animation */
 @keyframes promoEntranceAndBounce {
-    /* Entrance (0-1 seconds) */
-    0% {
-        right: -600px;
-        top: 50%;
-        opacity: 0;
-        transform: translateY(-50%) scale(0.8);
-    }
-    20% { /* 1 second mark */
-        right: 50%;
-        top: 50%;
-        opacity: 1;
-        transform: translate(50%, -50%) scale(1);
-    }
-    
-    /* Brief bouncing phase (1-4 seconds) */
-    40% { /* 2 seconds */
-        right: 20%;
-        top: 30%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    60% { /* 3 seconds */
-        right: 80%;
-        top: 70%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    80% { /* 4 seconds */
-        right: 50%;
-        top: 50%;
-        transform: translate(50%, -50%) scale(1);
-    }
-    
-    /* Exit (4-5 seconds) */
-    100% {
-        left: -600px;
-        right: auto;
-        top: 70%;
-        opacity: 0;
-        transform: translateY(-50%) scale(0.8);
-    }
+    /* Delete this entire keyframe */
 }
 
-/* Remove blue shadows - use green instead */
+/* Keep the gentle pulse for when it's active */
 .flying-promo.active .promo-link {
     animation: activePulseGreen 3s ease-in-out infinite;
 }
@@ -2137,8 +2156,8 @@ right: -67px;
     justify-content: center;
     text-decoration: none;
     background: radial-gradient(circle, rgba(35, 155, 203, 0.47) 0%, rgba(35, 203, 49, 0.2) 50%, transparent 80%);
-    border-radius: 50%; /* Perfect circle */
-    padding: 0; /* Remove padding to let content fill the circle */
+    border-radius: 50%;
+    padding: 0;
     transition: all 0.3s ease;
     position: relative;
     overflow: visible;
@@ -2149,7 +2168,7 @@ right: -67px;
 .promo-link::before {
     content: '';
     position: absolute;
-    top: -25px; /* Increased for larger size */
+    top: -25px;
     left: -25px;
     right: -25px;
     bottom: -25px;
@@ -2170,20 +2189,8 @@ right: -67px;
     transform: scale(1.05);
 }
 
-.promo-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: brightness(1.1) contrast(1.2);
-    transition: all 0.5s ease;
-    animation: gentlePulse 3s ease-in-out infinite;
-    opacity: 0.75;
-}
-
-/* Style for the first image (gif background) */
+/* Keep the rest of the promo styling the same */
+.promo-image,
 .promo-link img:first-child {
     position: absolute;
     top: 0;
@@ -2195,10 +2202,9 @@ right: -67px;
     transition: all 0.5s ease;
     animation: gentlePulse 3s ease-in-out infinite;
     opacity: 0.75;
-       z-index: 1;
+    z-index: 1;
 }
 
-/* Style for the second image (overlay image) */
 .promo-link img:nth-child(2) {
     position: absolute;
     top: 50%;
@@ -2239,12 +2245,12 @@ right: -67px;
 
 .promo-text {
     position: absolute;
-    bottom: -50px; /* Increased for larger size */
-    left: 50%;
+    bottom: 80px;
+    left: 10%;
     transform: translateX(-50%);
     color: rgb(167, 35, 203);
     font-family: 'VT323', monospace;
-    font-size: 28px; /* Increased from 24px */
+    font-size: 40px;
     font-weight: bold;
     text-align: center;
     white-space: nowrap;
@@ -2308,12 +2314,12 @@ right: -67px;
     }
 }
 
-/* Large tablets and small desktops */
+/* Update responsive breakpoints to use centered positioning */
 @media (min-width: 769px) and (max-width: 1024px) {
     .flying-promo {
         width: 450px;
         height: 450px;
-        right: -550px;
+        /* Keep centered positioning */
     }
     
     .promo-text {
@@ -2329,12 +2335,11 @@ right: -67px;
     }
 }
 
-/* Tablets */
 @media (min-width: 651px) and (max-width: 768px) {
     .flying-promo {
         width: 400px;
         height: 400px;
-        right: -500px;
+        /* Keep centered positioning */
     }
     
     .promo-text {
@@ -2347,6 +2352,26 @@ right: -67px;
         left: -20px;
         right: -20px;
         bottom: -20px;
+    }
+}
+
+@media (min-width: 451px) and (max-width: 650px) {
+    .flying-promo {
+        width: 350px;
+        height: 350px;
+        /* Keep centered positioning */
+    }
+    
+    .promo-text {
+        font-size: 22px;
+        bottom: -35px;
+    }
+    
+    .promo-link::before {
+        top: -18px;
+        left: -18px;
+        right: -18px;
+        bottom: -18px;
     }
 }
 /* Small tablets and large phones */
@@ -2476,7 +2501,8 @@ right: -67px;
         animation-duration: 28s;
         padding: 0 16px;
     }
-    
+}
+@media (max-width: 450px) {
     /* Flying promo adjustments for small tablets */
     .flying-promo {
         width: 350px;
@@ -2486,7 +2512,8 @@ right: -67px;
     
     .promo-text {
         font-size: 22px;
-        bottom: -35px;
+        bottom: 50px;
+        left: 25%;
     }
     
     .promo-link::before {
