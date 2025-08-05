@@ -828,6 +828,11 @@ right: -67px;
         height: 150px;
     }
     
+    /* Hide cheech elements on tablets */
+    .cheech, .cheech2 {
+        display: none;
+    }
+    
     nav ul {
         flex-direction: row;
         gap: 15px;
@@ -933,7 +938,8 @@ right: -67px;
     
     .promo-text {
         font-size: 22px;
-        bottom: -35px;
+        bottom: 50px;
+        left: 25%;
     }
     
     .promo-link::before {
@@ -950,7 +956,16 @@ right: -67px;
         width: 90%;
         margin-top: 170px;
     }
-    
+     .cheech {
+        left: 11%;
+        width: 95px;
+        transition: 2s ease-in-out;
+    }
+    .cheech2 {
+        left: 81%;
+        width: 78px;
+        transition: 2s ease-in-out;
+    }
     /* Four-column layout */
     .product-container, .product-container1, .product-container2 {
         display: flex;
@@ -995,7 +1010,21 @@ right: -67px;
 
 /* Desktop and larger */
 @media (min-width: 1025px) {
-    /* Original multi-column layout */
+
+.cheech
+{
+    position: absolute;
+    top: 66px;
+    left: 21%;
+    width: 115px;
+}
+.cheech2
+{
+    position: absolute;
+    top: 55px;
+  left: 72%;
+    width: 95px;
+}
     .product-container, .product-container1, .product-container2 {
         display: flex;
         flex-wrap: wrap;
@@ -2393,6 +2422,11 @@ right: -67px;
     .sword, .sword2 {
         right: 10px;
         height: 140px;
+    }
+    
+    /* Hide cheech elements on small tablets and large phones */
+    .cheech, .cheech2 {
+        display: none;
     }
     
     nav ul {
