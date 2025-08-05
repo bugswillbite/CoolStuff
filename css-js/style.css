@@ -2147,6 +2147,7 @@ right: -67px;
     transform: translate(-50%, -50%);
     z-index: 1000;
     opacity: 0;
+    display: none; /* Hidden by default */
     transition: opacity 0.8s ease-in-out;
     pointer-events: none;
     width: 500px;
@@ -2156,7 +2157,7 @@ right: -67px;
 .flying-promo.active {
     opacity: 1;
     pointer-events: auto;
-    /* Remove the complex animation and positioning changes */
+    display: block; /* Show when active */
 }
 
 /* Remove the complex bouncing animation */
@@ -2444,7 +2445,7 @@ right: -67px;
     }
     
     main {
-        width: 95%;
+               width: 95%;
         padding: 15px 10px;
         margin-top: 180px;
     }
