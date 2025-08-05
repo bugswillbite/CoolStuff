@@ -743,8 +743,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 pauseAutoScroll();
             }
         });
-        
-        // Make container focusable for keyboard navigation
         scrollContainer.setAttribute('tabindex', '0');
     }
 
@@ -756,89 +754,107 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log('Flying promo element not found');
             return;
         }
-
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) {
+            console.log('Mobile device detected - disabling flying promo');
+            flyingPromo.style.display = 'none';
+            return;
+        }
         let isPromoActive = false;
         let isPromoClicked = false;
         let isInteractiveMode = false;
         let regularInterval;
         let promoHideTimeout;
-        let enterFromLeft = false; // Track which side to enter from
-
-        // Array of possible links to open
+        let initialTimeout;
+        let enterFromLeft = false; 
         const promoLinks = [
             'https://www.podowski.net/',
             'https://theprophitt.bandcamp.com/',
             'https://www.youtube.com/@powdowski',
         ];
 
-        // Show promo function
         function showPromo() {
             if (isPromoActive || isInteractiveMode) {
                 console.log('Promo already active or in interactive mode, skipping');
                 return;
             }
-            
+            if (window.innerWidth <= 768) {
+                console.log('Screen too small, canceling promo');
+                return;
+            }
             console.log(`Showing flying promo from ${enterFromLeft ? 'left' : 'right'} side`);
             isPromoActive = true;
             isPromoClicked = false;
-            
-            // Clear any existing classes and reset opacity
             flyingPromo.classList.remove('clicked', 'interactive', 'from-left');
             flyingPromo.style.transition = '';
             flyingPromo.style.opacity = '';
-            
-            // Add appropriate class for entrance direction
+            flyingPromo.style.display = 'block';
             if (enterFromLeft) {
                 flyingPromo.classList.add('from-left');
             }
-            
             flyingPromo.classList.add('active');
-            
-            // Toggle entrance side for next time
             enterFromLeft = !enterFromLeft;
-            
-            // Hide after 5 seconds (animation duration) unless clicked
             promoHideTimeout = setTimeout(() => {
                 if (!isPromoClicked && !isInteractiveMode) {
                     console.log('Hiding flying promo after 5 seconds');
                     dismissPromo();
                 }
-            }, 5000); // Changed from 30000 to 5000 (5 seconds)
+            }, 5000);
         }
 
-        // Smooth dismiss function
         function dismissPromo() {
             flyingPromo.classList.remove('active', 'from-left');
             flyingPromo.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
             flyingPromo.style.opacity = '0';
             flyingPromo.style.transform = 'translateY(-50%) scale(0.8)';
-            
             setTimeout(() => {
+                flyingPromo.style.display = 'none';
                 flyingPromo.style.transition = '';
                 flyingPromo.style.opacity = '';
                 flyingPromo.style.transform = '';
                 isPromoActive = false;
-                console.log('Promo ready to show again');
-            }, 1000); // Wait for smooth transition to complete
+                console.log('Promo dismissed and ready to show again');
+            }, 1000);
         }
 
-        // Set up regular interval (every 5 minutes)
         regularInterval = setInterval(() => {
+            if (window.innerWidth <= 768) {
+                console.log('Screen too small for promo interval');
+                return;
+            }
             if (!isPromoActive && !isPromoClicked && !isInteractiveMode) {
                 console.log('5 minute interval triggered, showing promo');
                 showPromo();
             } else {
                 console.log('5 minute interval triggered but promo already active or in interactive mode');
             }
-        }, 300000); // 5 minutes (300,000 ms)
+        }, 300000); // 5 minutes
 
-        // Initialize first promo appearance after 5 minutes
-        setTimeout(() => {
+        // Initialize first promo appearance after 5 minutes - only on desktop
+        initialTimeout = setTimeout(() => {
+            if (window.innerWidth <= 768) {
+                console.log('Screen too small for initial promo');
+                return;
+            }
             console.log('Initial promo appearance after 5 minutes');
             showPromo();
-        }, 300000); // 5 minutes for initial appearance
+        }, 300000); // 5 minutes
 
-        // Handle promo click - randomly open one of three links
+        function handleResize() {
+            if (window.innerWidth <= 768) {
+                if (isPromoActive) {
+                    dismissPromo();
+                }
+                flyingPromo.style.display = 'none';
+                console.log('Screen resized to mobile - hiding promo');
+            } else if (flyingPromo.style.display === 'none') {
+                flyingPromo.style.display = 'block';
+                flyingPromo.style.opacity = '0';
+                console.log('Screen resized to desktop - enabling promo');
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
         flyingPromo.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -846,45 +862,22 @@ document.addEventListener("DOMContentLoaded", function () {
             
             if (isPromoActive && !isPromoClicked && !isInteractiveMode) {
                 isPromoClicked = true;
-                
-                // Select random link
                 const randomIndex = Math.floor(Math.random() * promoLinks.length);
-                const selectedLink = promoLinks[randomIndex];
-                
+                const selectedLink = promoLinks[randomIndex]; 
                 console.log(`Opening link ${randomIndex + 1}: ${selectedLink}`);
-                
-                // Clear the auto-hide timeout
                 if (promoHideTimeout) {
                     clearTimeout(promoHideTimeout);
                 }
-                
-                // Add clicked animation
                 flyingPromo.classList.remove('active', 'from-left');
                 flyingPromo.classList.add('clicked');
-                
-                // Open the link after a short delay for visual feedback
                 setTimeout(() => {
                     window.open(selectedLink, '_blank');
-                    
-                    // Smooth hide the promo after opening link
-                    flyingPromo.classList.remove('clicked');
-                    flyingPromo.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
-                    flyingPromo.style.opacity = '0';
-                    flyingPromo.style.transform = 'translate(50%, -50%) scale(0.8)';
-                    
-                    setTimeout(() => {
-                        flyingPromo.style.transition = '';
-                        flyingPromo.style.opacity = '';
-                        flyingPromo.style.transform = '';
-                        isPromoActive = false;
-                        isPromoClicked = false;
-                        console.log('Link opened and promo dismissed smoothly');
-                    }, 1000); // Smooth 1 second fade out
-                }, 300); // Short delay for click animation
+                    dismissPromo();
+                    isPromoClicked = false;
+                }, 300);
             }
         });
 
-        // Handle ESC key to dismiss with smooth fade
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && isPromoActive) {
                 console.log('ESC pressed, dismissing promo smoothly');
@@ -896,10 +889,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        console.log('Flying promo setup complete - will appear every 5 minutes with smooth fade transitions');
+        window.addEventListener('beforeunload', () => {
+            if (regularInterval) clearInterval(regularInterval);
+            if (initialTimeout) clearTimeout(initialTimeout);
+            if (promoHideTimeout) clearTimeout(promoHideTimeout);
+        });
+
+        console.log('Flying promo setup complete - desktop only, 5-minute intervals');
     }
 
-    // INITIALIZE EVERYTHING
     addScrollAnimations();
     observeElements();
     setupSmoothScroll();
@@ -924,6 +922,6 @@ window.addEventListener('scroll', () => {
     const windowCenter = window.innerHeight / 2;
     const offset = rect.top + rect.height / 2 - windowCenter;
 
-    const rotateY = Math.max(-15, Math.min(15, offset / 15)); // ← note: positive value
+    const rotateY = Math.max(-15, Math.min(15, offset / 15));
     image.style.transform = `rotateY(${rotateY}deg)`;
 });
