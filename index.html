@@ -9,8 +9,7 @@
     <script defer src="css-js/styles.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Limelight&family=Nabla:EDPT,EHLT@0..200,0..24&family=Savate:ital,wght@0,200..900;1,200..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=VT323&display=swap" rel="stylesheet">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Limelight&family=Nabla:EDPT,EHLT@0..200,0..24&family=Savate:ital,wght@0,200..900;1,200..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=VT323&display=swap" rel="stylesheet"></head>
 
 <body>
     <!-- VERTICAL SCROLLING TEXT LEFT -->
@@ -83,10 +82,18 @@
                 <div class="settings-menu-content">
                     <h4>settings</h4>
                     <div class="setting-item">
-                        <label>background animations: </label>
-                        <button id="animationToggle" class="setting-toggle-btn">
-                            <span class="toggle-text"> ON</span>
-                        </button>
+                        <label class="setting-label">TOGGLE ANIMATIONS: </label>
+                        
+                        <label class="switch">
+                        <input type="checkbox" checked="checked" id="animationToggle">
+                        <div class="button">
+                            <div class="light"></div>
+                            <div class="dots"></div>
+                            <div class="characters"></div>
+                            <div class="shine"></div>
+                            <div class="shadow"></div>
+                        </div>
+                        </label>
                     </div>
                 </div>
             </div>
