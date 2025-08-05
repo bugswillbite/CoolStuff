@@ -1429,16 +1429,16 @@ right: -67px;
 .settings-menu.active {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+margin-top: 6px;
 }
 
 .settings-menu-content h4 {
     color: rgb(35, 203, 49);
-    font-family: Consolas, Courier, monospace;
-    font-size: 16px;
+  font-family: "Cutive Mono", monospace;    font-size: 23px;
     margin: 0 0 15px 0;
     text-align: center;
     text-shadow: 0 0 10px #411;
+    margin-left: -166px;
 }
 
 .setting-item {
@@ -1451,8 +1451,10 @@ right: -67px;
 .setting-item label {
     color: rgb(35, 203, 49);
     font-family: Consolas, Courier, monospace;
-    font-size: 12px;
+    font-size: 28px;
     text-shadow: 0 0 10px #411;
+    max-width: 200px;
+    
 }
 
 .setting-toggle-btn {
@@ -1483,7 +1485,11 @@ right: -67px;
 .setting-toggle-btn.disabled:hover {
     background: rgba(203, 35, 49, 0.4);
 }
-
+.setting-item .setting-label
+{
+    font-family: "Cutive Mono", monospace;
+    margin-top: 43px;
+}
 .BN {
     width: 45%;
     margin: 20px 0;
@@ -2557,4 +2563,145 @@ right: -67px;
         right: -18px;
         bottom: -18px;
     }
+}
+
+.switch {
+  display: block;
+  background-color: black;
+  width: 75px; /* was 150px */
+  height: 97.5px; /* was 195px */
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2), 0 0 0.5px 1px black,
+              inset 0 1px 1px -1px white, inset 0 0 1px 7.5px #47434c,
+              inset 0 0 1px 11px black;
+  border-radius: 2.5px;
+  padding: 10px; /* was 20px */
+  perspective: 350px; /* was 700px */
+}
+
+.switch input {
+  display: none;
+}
+
+.switch input:checked + .button {
+  transform: translateZ(10px) rotateX(12.5deg); /* halved */
+  box-shadow: 0 -5px 10px #0bb513; /* halved */
+}
+
+.switch input:checked + .button .light {
+  animation: flicker 0.2s infinite 0.3s;
+}
+
+.switch input:checked + .button .shine {
+  opacity: 1;
+}
+
+.switch input:checked + .button .shadow {
+  opacity: 0;
+}
+
+.switch .button {
+  display: block;
+  transition: all 0.3s cubic-bezier(1, 0, 1, 1);
+  transform-origin: center center -10px;
+  transform: translateZ(10px) rotateX(-12.5deg);
+  transform-style: preserve-3d;
+  background-color: #069b24;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  background: linear-gradient(#009849 0%, #1c6f00 30%, #006f1a 70%, #00980d 100%);
+  background-repeat: no-repeat;
+}
+
+.switch .button::before {
+  content: "";
+  background: linear-gradient(rgba(255, 255, 255, 0.8) 10%, rgba(255, 255, 255, 0.3) 30%, #005013 75%, #00320c) 50% 50%/97% 97%, #00b106;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 25px; /* was 50px */
+  transform-origin: top;
+  transform: rotateX(-90deg);
+  position: absolute;
+  top: 0;
+}
+
+.switch .button::after {
+  content: "";
+  background-image: linear-gradient(#006505, #003202);
+  width: 100%;
+  height: 25px; /* was 50px */
+  transform-origin: top;
+  transform: translateY(25px) rotateX(-90deg); /* halved Y */
+  position: absolute;
+  bottom: 0;
+  box-shadow: 0 25px 4px 0px black, 0 40px 10px 0px rgba(0, 0, 0, 0.5); /* halved */
+}
+
+.switch .light {
+  opacity: 0;
+  animation: light-off 1s;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#c5ff7e, #18ff24 40%, transparent 70%);
+}
+
+
+.switch .dots {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(transparent 30%, rgba(0, 101, 13, 0.7) 70%);
+  background-size: 10px 10px;
+}
+
+.switch .characters {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(white, white) 50% 20%/5% 20%, radial-gradient(circle, transparent 50%, white 52%, white 70%, transparent 72%) 50% 80%/33% 25%;
+  background-repeat: no-repeat;
+}
+
+.switch .shine {
+  transition: all 0.3s cubic-bezier(1, 0, 1, 1);
+  opacity: 0.3;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(white, transparent 3%) 50% 50%/97% 97%, 
+    linear-gradient(rgba(255, 255, 255, 0.5), transparent 50%, transparent 80%, rgba(255, 255, 255, 0.5)) 50% 50%/97% 97%;
+  background-repeat: no-repeat;
+}
+
+.switch .shadow {
+  transition: all 0.3s cubic-bezier(1, 0, 1, 1);
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent 70%, rgba(0, 0, 0, 0.8));
+  background-repeat: no-repeat;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes light-off {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
 }
