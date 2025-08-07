@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
             'cyber-dreams': {
                 name: 'Hip Hop',
                 songTitle: 'FLO NAZER',
-                albumCover: 'imgs/ALBUMS/SKATE.png',
+                albumCover: 'imgs/ALBUMS/phoneoe copy.gif',
                 url: 'music/hip-hop.mp3',
                 description: 'This is Hip Hop radio - FLO NAZER. All songs produced & composed by The Prophitt.'
             },
@@ -319,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
             'retro-wave': {
                 name: 'House',
                 songTitle: 'REFRIDGERATOR RUNNIN',
-                albumCover: 'imgs/ALBUMS/PARKOUR.png',
+                albumCover: 'imgs/ALBUMS/hand.gif',
                 url: 'music/refridgerator_runnin_101 HOUSE.mp3',
                 description: 'House Track -+> REFRIDGERATOR RUNNIN. All songs produced & composed by The Prophitt. Better go catch it!'
             },
